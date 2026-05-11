@@ -32,6 +32,11 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "sharp"
-    ]
+    ],
+    "overrides": {
+      "axios": ">=1.15.2",
+      "fast-xml-builder": ">=1.1.7",
+      "fast-uri": ">=3.1.2"
+    }
   }
 }
