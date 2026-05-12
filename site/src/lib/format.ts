@@ -19,11 +19,11 @@ export function ghostImageUrl(src: string | null, size: GhostImageSize): string 
   );
 }
 
-export function isoDate(date: string): string {
+export function isoDate(date: string | Date): string {
   return new Date(date).toISOString().slice(0, 10);
 }
 
-export function shortDate(date: string): string {
+export function shortDate(date: string | Date): string {
   return new Date(date).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -31,7 +31,7 @@ export function shortDate(date: string): string {
   });
 }
 
-export function monthYear(date: string): string {
+export function monthYear(date: string | Date): string {
   return new Date(date).toLocaleDateString('en-US', {
     month: 'short',
     year: 'numeric',

@@ -1,16 +1,16 @@
 ---
-import type { GhostPost } from '~/lib/ghost.types';
+import type { PostEntry } from '~/lib/tags';
 
 interface Props {
-  post: GhostPost;
+  entry: PostEntry;
 }
 
-const { post } = Astro.props;
-const url = `/writing/${post.slug}/`;
-const teaser = post.custom_excerpt ?? post.excerpt;
+const { entry } = Astro.props;
+const url = `/writing/${entry.id}/`;
+const teaser = entry.data.excerpt;
 ---
 
 <a href={url} class="sidebar-post-link">
-  <span class="sidebar-post-title">{post.title}</span>
+  <span class="sidebar-post-title">{entry.data.title}</span>
   {teaser && <span class="sidebar-post-teaser">{teaser}</span>}
 </a>

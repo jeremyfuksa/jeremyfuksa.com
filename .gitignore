@@ -26,3 +26,7 @@ site/.astro/
 site/.env
 site/.env.production
 site/coverage/
+
+# Migration tooling
+tools/node_modules/
+tools/.migrate-report.json

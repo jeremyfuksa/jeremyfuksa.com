@@ -1,20 +1,32 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import { getAllPosts } from '~/lib/ghost';
+import { render } from 'astro:content';
+import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { getAllPostsSorted } from '~/lib/tags';
 
 export async function GET(context: APIContext) {
-  const posts = await getAllPosts();
+  const posts = await getAllPostsSorted();
+  const container = await AstroContainer.create();
+
+  const items = await Promise.all(
+    posts.map(async (entry) => {
+      const { Content } = await render(entry);
+      const content = await container.renderToString(Content);
+      return {
+        title: entry.data.title,
+        description: entry.data.excerpt,
+        pubDate: entry.data.publishedAt,
+        link: `/writing/${entry.id}/`,
+        content,
+      };
+    }),
+  );
+
   return rss({
     title: 'The Cocktail Napkin — Jeremy Fuksa',
     description: 'Essays and notes on design, AI, and design systems.',
     site: context.site!,
-    items: posts.map((post) => ({
-      title: post.title,
-      description: post.custom_excerpt ?? post.excerpt,
-      pubDate: new Date(post.published_at),
-      link: `/writing/${post.slug}/`,
-      content: post.html,
-    })),
+    items,
     customData: '<language>en-us</language>',
   });
 }

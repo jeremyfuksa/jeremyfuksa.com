@@ -1,46 +1,53 @@
 ---
-import type { GhostPost } from '~/lib/ghost.types';
-import { ghostImageUrl, isoDate, shortDate, readingTime } from '~/lib/format';
+import { Image } from 'astro:assets';
+import type { PostEntry } from '~/lib/tags';
+import { isoDate, shortDate, readingTime } from '~/lib/format';
 import TagPill from './TagPill.astro';
 
 interface Props {
-  post: GhostPost;
+  entry: PostEntry;
 }
 
-const { post } = Astro.props;
-const url = `/writing/${post.slug}/`;
-const featureImage = ghostImageUrl(post.feature_image, 'm');
-const excerpt = post.custom_excerpt ?? post.excerpt;
-const readtime = readingTime(post.reading_time);
+const { entry } = Astro.props;
+const { data } = entry;
+const url = `/writing/${entry.id}/`;
+const readtime = readingTime(data.readingTime);
 ---
 
-<article class={`post-card ${featureImage ? 'post-card-has-image' : ''}`}>
-  {featureImage && (
+<article class={`post-card ${data.coverImage ? 'post-card-has-image' : ''}`}>
+  {data.coverImage && (
     <div class="post-card-image-col">
       <a href={url} class="post-card-image-link">
-        <img class="post-card-image" src={featureImage} alt="" loading="lazy" />
+        <Image
+          class="post-card-image"
+          src={data.coverImage}
+          alt={data.coverImageAlt ?? ''}
+          loading="lazy"
+          widths={[320, 480, 720]}
+          sizes="(min-width: 720px) 360px, 100vw"
+        />
       </a>
       <div class="post-card-meta">
-        <TagPill tags={post.tags} />
+        <TagPill tags={data.tags} />
         <span class="post-card-date">
-          <time datetime={isoDate(post.published_at)}>{shortDate(post.published_at)}</time>
+          <time datetime={isoDate(data.publishedAt)}>{shortDate(data.publishedAt)}</time>
         </span>
       </div>
     </div>
   )}
   <div class="post-card-content">
-    {!featureImage && (
+    {!data.coverImage && (
       <div class="post-card-meta">
-        <TagPill tags={post.tags} />
+        <TagPill tags={data.tags} />
         <span class="post-card-date">
-          <time datetime={isoDate(post.published_at)}>{shortDate(post.published_at)}</time>
+          <time datetime={isoDate(data.publishedAt)}>{shortDate(data.publishedAt)}</time>
         </span>
       </div>
     )}
     <a href={url}>
-      <h3 class="post-card-title">{post.title}</h3>
+      <h3 class="post-card-title">{data.title}</h3>
     </a>
-    {excerpt && <p class="post-card-excerpt">{excerpt}</p>}
+    {data.excerpt && <p class="post-card-excerpt">{data.excerpt}</p>}
     <div class="post-card-footer">
       {readtime && <span class="post-card-readtime">{readtime}</span>}
       <a href={url} class="post-card-read-link">Read <span>&rarr;</span></a>

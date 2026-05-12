@@ -1,35 +1,42 @@
 ---
-import type { GhostPost } from '~/lib/ghost.types';
-import { ghostImageUrl, isoDate, shortDate, readingTime } from '~/lib/format';
+import { Image } from 'astro:assets';
+import type { PostEntry } from '~/lib/tags';
+import { isoDate, shortDate, readingTime } from '~/lib/format';
 import TagPill from './TagPill.astro';
 
 interface Props {
-  post: GhostPost;
+  entry: PostEntry;
 }
 
-const { post } = Astro.props;
-const url = `/writing/${post.slug}/`;
-const featureImage = ghostImageUrl(post.feature_image, 'l');
-const excerpt = post.custom_excerpt ?? post.excerpt;
-const readtime = readingTime(post.reading_time);
+const { entry } = Astro.props;
+const { data } = entry;
+const url = `/writing/${entry.id}/`;
+const readtime = readingTime(data.readingTime);
 ---
 
-<article class={`post-card-featured ${featureImage ? 'post-card-featured-has-image' : ''}`}>
-  {post.featured && <div class="featured-badge">&#9733; Featured</div>}
-  {featureImage && (
+<article class={`post-card-featured ${data.coverImage ? 'post-card-featured-has-image' : ''}`}>
+  {data.featured && <div class="featured-badge">&#9733; Featured</div>}
+  {data.coverImage && (
     <a href={url} class="post-card-featured-image-link">
-      <img class="post-card-featured-image" src={featureImage} alt="" loading="lazy" />
+      <Image
+        class="post-card-featured-image"
+        src={data.coverImage}
+        alt={data.coverImageAlt ?? ''}
+        loading="lazy"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1024px) 720px, 100vw"
+      />
     </a>
   )}
   <div class="post-card-meta">
-    <TagPill tags={post.tags} />
+    <TagPill tags={data.tags} />
     <span class="post-card-date">
-      <time datetime={isoDate(post.published_at)}>{shortDate(post.published_at)}</time>
+      <time datetime={isoDate(data.publishedAt)}>{shortDate(data.publishedAt)}</time>
     </span>
     {readtime && <span class="post-card-readtime">{readtime}</span>}
   </div>
   <a href={url}>
-    <h2 class="post-card-title">{post.title}</h2>
+    <h2 class="post-card-title">{data.title}</h2>
   </a>
-  {excerpt && <p class="post-card-excerpt">{excerpt}</p>}
+  {data.excerpt && <p class="post-card-excerpt">{data.excerpt}</p>}
 </article>

@@ -1,8 +1,8 @@
 ---
-import type { GhostTag } from '~/lib/ghost.types';
+import { tagSlug } from '~/lib/tags';
 
 interface Props {
-  tags: GhostTag[];
+  tags: string[];
 }
 
 const { tags } = Astro.props;
@@ -10,5 +10,5 @@ const first = tags[0];
 ---
 
 {first && (
-  <a href={`/tag/${first.slug}/`} class="tag">{first.name}</a>
+  <a href={`/tag/${tagSlug(first)}/`} class="tag">{first}</a>
 )}

@@ -38,4 +38,24 @@ const caseStudies = defineCollection({
     }),
 });
 
-export const collections = { 'case-studies': caseStudies };
+const posts = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      slug: z.string().optional(),
+      excerpt: z.string().optional(),
+      publishedAt: z.coerce.date(),
+      updatedAt: z.coerce.date().optional(),
+      featured: z.boolean().default(false),
+      draft: z.boolean().default(false),
+      tags: z.array(z.string()).default([]),
+      author: z.string().default('Jeremy Fuksa'),
+      coverImage: image().optional(),
+      coverImageAlt: z.string().optional(),
+      coverImageCaption: z.string().optional(),
+      readingTime: z.number().optional(),
+    }),
+});
+
+export const collections = { 'case-studies': caseStudies, posts };

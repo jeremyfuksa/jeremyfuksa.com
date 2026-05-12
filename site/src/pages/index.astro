@@ -2,12 +2,14 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostCardFeatured from '~/components/PostCardFeatured.astro';
 import SidebarPostLink from '~/components/SidebarPostLink.astro';
-import { getAllPosts } from '~/lib/ghost';
+import { getAllPostsSorted } from '~/lib/tags';
 
-const allPosts = await getAllPosts();
-const featuredPosts = allPosts.filter((p) => p.featured);
+const allPosts = await getAllPostsSorted();
+const featuredPosts = allPosts.filter((p) => p.data.featured);
 const heroPost = featuredPosts[0] ?? allPosts[0];
-const sidebarPosts = (featuredPosts.length > 0 ? featuredPosts.slice(1, 6) : allPosts.slice(1, 6));
+const sidebarPosts = featuredPosts.length > 0
+  ? featuredPosts.slice(1, 6)
+  : allPosts.slice(1, 6);
 ---
 
 <BaseLayout
@@ -80,13 +82,13 @@ const sidebarPosts = (featuredPosts.length > 0 ? featuredPosts.slice(1, 6) : all
   <div class="home-writing-grid">
     <main>
       <span class="section-title">Latest</span>
-      {heroPost && <PostCardFeatured post={heroPost} />}
+      {heroPost && <PostCardFeatured entry={heroPost} />}
     </main>
 
     <aside class="sidebar">
       <span class="section-title">Previous Writing</span>
       <nav class="sidebar-posts">
-        {sidebarPosts.map((post) => <SidebarPostLink post={post} />)}
+        {sidebarPosts.map((entry) => <SidebarPostLink entry={entry} />)}
         <a href="/writing/" class="sidebar-posts-all">All posts &rarr;</a>
       </nav>
     </aside>

@@ -2,13 +2,12 @@
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostCard from '~/components/PostCard.astro';
-import { getAllPosts, getAllTags } from '~/lib/ghost';
+import { getAllPostsSorted, getAllTagsWithCounts, type PostEntry } from '~/lib/tags';
 
 export const getStaticPaths = (async () => {
   const POSTS_PER_PAGE = 15;
-  const all = await getAllPosts();
+  const all = await getAllPostsSorted();
   const totalPages = Math.ceil(all.length / POSTS_PER_PAGE);
-  // Pages 2..N (page 1 is /writing/)
   const pages = [];
   for (let i = 2; i <= totalPages; i++) {
     pages.push({
@@ -24,8 +23,13 @@ export const getStaticPaths = (async () => {
   return pages;
 }) satisfies GetStaticPaths;
 
-const { pageNum, totalPages, posts, totalCount } = Astro.props;
-const allTags = await getAllTags();
+const { pageNum, totalPages, posts, totalCount } = Astro.props as {
+  pageNum: number;
+  totalPages: number;
+  posts: PostEntry[];
+  totalCount: number;
+};
+const allTags = await getAllTagsWithCounts();
 const prevUrl = pageNum === 2 ? '/writing/' : `/writing/page/${pageNum - 1}/`;
 const nextUrl = pageNum < totalPages ? `/writing/page/${pageNum + 1}/` : null;
 ---
@@ -47,7 +51,7 @@ const nextUrl = pageNum < totalPages ? `/writing/page/${pageNum + 1}/` : null;
     </div>
 
     <main>
-      {posts.map((post) => <PostCard post={post} />)}
+      {posts.map((entry) => <PostCard entry={entry} />)}
 
       <div class="pagination">
         <a href={prevUrl}>&larr; Newer</a>

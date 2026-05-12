@@ -2,16 +2,21 @@
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostCard from '~/components/PostCard.astro';
-import { getAllTags, getPostsByTag } from '~/lib/ghost';
+import {
+  getAllTagsWithCounts,
+  getPostsByTagSlug,
+  type TagWithCount,
+  type PostEntry,
+} from '~/lib/tags';
 
 export const getStaticPaths = (async () => {
-  const tags = await getAllTags();
+  const tags = await getAllTagsWithCounts();
   const out = await Promise.all(
     tags.map(async (tag) => ({
       params: { slug: tag.slug },
       props: {
         tag,
-        posts: await getPostsByTag(tag.slug),
+        posts: await getPostsByTagSlug(tag.slug),
         allTags: tags,
       },
     })),
@@ -19,7 +24,11 @@ export const getStaticPaths = (async () => {
   return out;
 }) satisfies GetStaticPaths;
 
-const { tag, posts, allTags } = Astro.props;
+const { tag, posts, allTags } = Astro.props as {
+  tag: TagWithCount;
+  posts: PostEntry[];
+  allTags: TagWithCount[];
+};
 ---
 
 <BaseLayout title={`${tag.name} — Jeremy Fuksa`}>
@@ -39,7 +48,7 @@ const { tag, posts, allTags } = Astro.props;
     </div>
 
     <main>
-      {posts.map((post) => <PostCard post={post} />)}
+      {posts.map((entry) => <PostCard entry={entry} />)}
     </main>
   </div>
 </BaseLayout>

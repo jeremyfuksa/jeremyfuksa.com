@@ -1,0 +1,19 @@
+{
+  "name": "ghost-migration-tools",
+  "private": true,
+  "type": "module",
+  "description": "One-time scripts for migrating content out of Ghost into Astro content collections. Not part of the Astro app — install and run from this directory.",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "migrate": "node migrate-from-ghost.mjs",
+    "migrate:dry": "node migrate-from-ghost.mjs --dry-run"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "gray-matter": "^4.0.3",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
+  }
+}

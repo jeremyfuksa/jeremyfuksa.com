@@ -1,112 +1,81 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import IconShare from '~/components/IconShare.astro';
-import TagPill from '~/components/TagPill.astro';
+import PostLayout from '~/components/PostLayout.astro';
 import PostCard from '~/components/PostCard.astro';
-import { getAllPosts } from '~/lib/ghost';
-import { ghostImageUrl, isoDate, shortDate, readingTime } from '~/lib/format';
-import type { GhostPost } from '~/lib/ghost.types';
+import { getAllPostsSorted, tagSlug, type PostEntry } from '~/lib/tags';
+import { shortDate } from '~/lib/format';
 
 export const getStaticPaths = (async () => {
-  const posts = await getAllPosts();
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post, allPosts: posts },
+  const posts = await getAllPostsSorted();
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry, allPosts: posts },
   }));
 }) satisfies GetStaticPaths;
 
-const { post, allPosts } = Astro.props as { post: GhostPost; allPosts: GhostPost[] };
-const featureImage = ghostImageUrl(post.feature_image, 'l');
-const ogImage = ghostImageUrl(post.feature_image, 'xl') ?? undefined;
-const readtime = readingTime(post.reading_time);
+const { entry, allPosts } = Astro.props as {
+  entry: PostEntry;
+  allPosts: PostEntry[];
+};
+const { data } = entry;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+const readingMinutes = data.readingTime ?? remarkPluginFrontmatter?.minutesRead;
 
-const related = post.primary_tag
+const primaryTag = data.tags[0];
+const primaryTagSlug = primaryTag ? tagSlug(primaryTag) : null;
+const related = primaryTagSlug
   ? allPosts
-      .filter((p) => p.id !== post.id && p.tags.some((t) => t.slug === post.primary_tag!.slug))
+      .filter(
+        (p) =>
+          p.id !== entry.id &&
+          p.data.tags.some((t) => tagSlug(t) === primaryTagSlug),
+      )
       .slice(0, 3)
   : [];
 
-const more = allPosts.filter((p) => p.id !== post.id).slice(0, 3);
+const more = allPosts.filter((p) => p.id !== entry.id).slice(0, 3);
 ---
 
 <BaseLayout
-  title={`${post.title} — Jeremy Fuksa`}
-  description={post.custom_excerpt ?? post.excerpt}
-  ogImage={ogImage}
+  title={`${data.title} — Jeremy Fuksa`}
+  description={data.excerpt}
 >
-  <header class="post-header">
-    <a href="/writing/" class="post-header-back">&larr; All writing</a>
-    <h1 class="post-header-title">{post.title}</h1>
-    <div class="post-header-meta">
-      <TagPill tags={post.tags} />
-      <span class="post-card-date">
-        <time datetime={isoDate(post.published_at)}>{shortDate(post.published_at)}</time>
-      </span>
-      {readtime && <span class="post-card-readtime">{readtime}</span>}
-      <a class="post-share-inline" href="#/share" aria-label="Share this post">
-        <IconShare />Share
-      </a>
-    </div>
-    {post.custom_excerpt && <p class="post-header-excerpt">{post.custom_excerpt}</p>}
-    {featureImage && (
-      <figure class="post-header-image">
-        <img src={featureImage} alt={post.title} />
-        {post.feature_image_caption && (
-          <figcaption set:html={post.feature_image_caption} />
-        )}
-      </figure>
-    )}
-    {post.primary_author && (
-      <div class="post-header-byline">
-        {post.primary_author.profile_image ? (
-          <img class="post-header-avatar" src={post.primary_author.profile_image} alt={post.primary_author.name} />
-        ) : (
-          <div class="post-header-avatar"></div>
-        )}
-        <div>
-          <div class="post-header-author-name">{post.primary_author.name}</div>
-          {post.primary_author.bio && (
-            <div class="post-header-author-role">{post.primary_author.bio}</div>
-          )}
-        </div>
-      </div>
-    )}
-  </header>
+  <PostLayout
+    title={data.title}
+    excerpt={data.excerpt}
+    publishedAt={data.publishedAt}
+    updatedAt={data.updatedAt}
+    tags={data.tags}
+    author={data.author}
+    readingMinutes={readingMinutes}
+    coverImage={data.coverImage}
+    coverImageAlt={data.coverImageAlt}
+    coverImageCaption={data.coverImageCaption}
+    isDraft={data.draft}
+  >
+    <Content />
 
-  <div class="post-layout">
-    <article class="post-content gh-content" set:html={post.html} />
-
-    <aside class="post-sidebar">
-      <div class="post-sidebar-title">On this page</div>
-      <nav class="toc"></nav>
-
+    <Fragment slot="sidebar">
       {related.length > 0 && (
         <>
           <div class="post-sidebar-title">Related</div>
           {related.map((r) => (
             <div class="post-card">
-              <a href={`/writing/${r.slug}/`}>
-                <h4 class="post-card-title">{r.title}</h4>
+              <a href={`/writing/${r.id}/`}>
+                <h4 class="post-card-title">{r.data.title}</h4>
               </a>
-              <span class="post-card-date">{shortDate(r.published_at)}</span>
+              <span class="post-card-date">{shortDate(r.data.publishedAt)}</span>
             </div>
           ))}
         </>
       )}
-    </aside>
-  </div>
-
-  <section class="post-share" aria-label="Share">
-    <div class="post-share-label">Enjoyed this?</div>
-    <a class="post-share-cta" href="#/share">
-      <IconShare />
-      Share this post
-    </a>
-  </section>
+    </Fragment>
+  </PostLayout>
 
   <footer class="post-footer">
     <div class="post-footer-title">More writing</div>
-    {more.map((m) => <PostCard post={m} />)}
+    {more.map((m) => <PostCard entry={m} />)}
   </footer>
 </BaseLayout>
