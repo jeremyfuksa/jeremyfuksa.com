@@ -164,7 +164,9 @@ function makeStashToken(idx) {
 }
 
 function looksEmpty(html) {
-  return !html || !html.replace(/<[^>]+>/g, '').trim();
+  if (!html) return true;
+  const $$ = loadHtml(`<div id="x">${html}</div>`, null, false);
+  return !$$('#x').text().trim();
 }
 
 async function transformPost(post, turndown) {
