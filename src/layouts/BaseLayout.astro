@@ -32,23 +32,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   {!noCanonical && <meta property="og:url" content={canonical} />}
   {ogImage && <meta property="og:image" content={ogImage} />}
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,WONK@9..144,100..900,0..1&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="preload" href="/fonts/fraunces-latin-var.woff2" as="font" type="font/woff2" crossorigin />
   <script is:inline>
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.documentElement.classList.add('dark');
     }
-  </script>
-  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DJBY6FWMKN"></script>
-  <script is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DJBY6FWMKN');
   </script>
 </head>
 <body class={bodyClass}>
@@ -59,5 +47,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <SiteFooter />
   <div class="reading-progress" aria-hidden="true"></div>
   <script src="/scripts/main.js" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DJBY6FWMKN');
+    addEventListener('load', () => {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DJBY6FWMKN';
+      document.head.appendChild(s);
+    });
+  </script>
 </body>
 </html>
