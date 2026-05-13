@@ -187,29 +187,6 @@
   padding-top: var(--spacing-5);
 }
 
-.footer-row-subscribe {
-  padding-top: var(--spacing-4);
-  margin-top: var(--spacing-4);
-  border-top: var(--border-hairline) solid var(--color-footer-border);
-  text-align: center;
-}
-
-.footer-subscribe-link {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-  color: var(--color-footer-text);
-  text-decoration: none;
-  opacity: 0.8;
-  transition: opacity var(--transition-fast);
-}
-
-.footer-subscribe-link:hover {
-  opacity: 1;
-  color: var(--color-accent-text);
-}
-
 .footer-brand {
   display: flex;
   align-items: center;
@@ -2813,53 +2790,6 @@
   padding: var(--spacing-12) var(--spacing-8) var(--spacing-20);
 }
 
-/* ==========================================================================
-   Subscribe CTA (reusable across case studies)
-   ========================================================================== */
-
-.subscribe-cta-section {
-  max-width: var(--content-max);
-  margin: var(--spacing-16) calc(-1 * var(--spacing-8)) 0;
-  padding: var(--spacing-12) var(--spacing-8);
-  border-top: var(--border-hairline) solid var(--color-worked-with-border);
-  border-bottom: var(--border-hairline) solid var(--color-worked-with-border);
-  background: var(--color-worked-with-bg);
-  text-align: center;
-}
-
-.subscribe-cta-title {
-  font-size: var(--text-4xl);
-  line-height: var(--leading-4xl);
-  margin-bottom: var(--spacing-4);
-  max-width: var(--prose-max);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.subscribe-cta-body {
-  font-size: var(--text-lg);
-  line-height: var(--leading-lg);
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-6);
-  max-width: var(--prose-max);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.subscribe-cta-actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-6);
-  align-items: center;
-}
-
-@media (max-width: 600px) {
-  .subscribe-cta-section {
-    margin: var(--spacing-16) calc(-1 * var(--spacing-4)) 0;
-    padding: var(--spacing-10) var(--spacing-4);
-  }
-}
-
 .casestudy-back {
   font-size: var(--text-xs);
   color: var(--text-tertiary);
@@ -3194,8 +3124,7 @@
     padding-right: var(--spacing-6);
   }
   .work-cta-section,
-  .about-cta-section,
-  .subscribe-cta-section {
+  .about-cta-section {
     margin-left: calc(-1 * var(--spacing-6));
     margin-right: calc(-1 * var(--spacing-6));
     padding-left: var(--spacing-6);

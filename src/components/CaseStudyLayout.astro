@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import SubscribeCta from './SubscribeCta.astro';
 import { readingTime } from '~/lib/format';
 
 interface Props {
@@ -131,6 +130,4 @@ const readtime = readingTime(readingMinutes);
       )}
     </aside>
   </div>
-
-  <SubscribeCta />
 </div>
