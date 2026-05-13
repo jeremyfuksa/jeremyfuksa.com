@@ -2,11 +2,14 @@ import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { render } from 'astro:content';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
+import { loadRenderers } from 'astro:container';
+import { getContainerRenderer as getMDXRenderer } from '@astrojs/mdx';
 import { getAllPostsSorted } from '~/lib/tags';
 
 export async function GET(context: APIContext) {
   const posts = await getAllPostsSorted();
-  const container = await AstroContainer.create();
+  const renderers = await loadRenderers([getMDXRenderer()]);
+  const container = await AstroContainer.create({ renderers });
 
   const items = await Promise.all(
     posts.map(async (entry) => {
