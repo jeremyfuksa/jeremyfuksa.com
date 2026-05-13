@@ -18,7 +18,7 @@
 import { createHmac, createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { dirname, join, basename, extname } from 'node:path';
+import { dirname, join, basename, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { load as loadHtml } from 'cheerio';
@@ -37,8 +37,8 @@ function arg(name, fallback = null) {
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const GHOST_URL = (arg('ghost-url') || 'https://cms.jeremyfuksa.com').replace(/\/+$/, '');
-const CONTENT_DIR = join(repoRoot, arg('content-dir') || 'site/src/content/posts');
-const ASSET_DIR = join(repoRoot, arg('asset-dir') || 'site/src/assets/posts');
+const CONTENT_DIR = resolve(repoRoot, arg('content-dir') || 'site/src/content/posts');
+const ASSET_DIR = resolve(repoRoot, arg('asset-dir') || 'site/src/assets/posts');
 const INCLUDE_DRAFTS = arg('include-drafts') !== 'false';
 const ONLY_SLUG = typeof arg('only-slug') === 'string' ? arg('only-slug') : null;
 const DRY_RUN = Boolean(arg('dry-run'));
