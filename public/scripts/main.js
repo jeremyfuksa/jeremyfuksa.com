@@ -8,28 +8,23 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---- Theme toggle ------------------------------------------------------
+  // Note: the inline head script in BaseLayout has already applied the
+  // correct theme before paint (reading localStorage + prefers-color-scheme).
+  // This block only owns the click handler + aria-pressed sync.
   var toggle = document.querySelector('.theme-toggle');
   if (toggle) {
-    var stored = localStorage.getItem('theme');
-    if (stored) {
-      document.documentElement.setAttribute('data-theme', stored);
-      document.documentElement.classList.toggle('dark', stored === 'dark');
-    }
+    var syncPressed = function () {
+      toggle.setAttribute('aria-pressed', document.documentElement.classList.contains('dark') ? 'true' : 'false');
+    };
+    syncPressed();
 
     toggle.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme');
-      var isDark;
-
-      if (current) {
-        isDark = current === 'dark';
-      } else {
-        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      }
-
+      var isDark = document.documentElement.classList.contains('dark');
       var next = isDark ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       document.documentElement.classList.toggle('dark', next === 'dark');
       localStorage.setItem('theme', next);
+      syncPressed();
     });
   }
 
