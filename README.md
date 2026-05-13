@@ -36,13 +36,14 @@ Edits under `src/` hot-reload.
 ## Production deploy
 
 Production is a DigitalOcean droplet (`161.35.226.162`) running Traefik
-(TLS) and an `astro-web` nginx container serving `dist`. A `webhook`
-container runs `rebuild-astro.sh` which pulls the repo and rebuilds Astro
-in place.
+(TLS) and an `astro-web` nginx container serving `dist/`. A systemd
+path unit on the host watches `~/.rebuild-trigger/rebuild` and runs
+`rebuild-jeremyfuksa.sh` (git pull + pnpm install + pnpm build) when
+the file appears.
 
 ```bash
 git push origin main
-ssh admin@161.35.226.162 'docker exec webhook /scripts/rebuild-astro.sh'
+ssh admin@161.35.226.162 'touch /home/admin/.rebuild-trigger/rebuild'
 ```
 
 ## Design system

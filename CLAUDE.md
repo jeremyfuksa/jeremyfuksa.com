@@ -33,19 +33,19 @@ pnpm preview   # serve dist/ locally
 
 Production is a DigitalOcean droplet at `161.35.226.162`. Traefik (TLS)
 routes `jeremyfuksa.com` to an `astro-web` nginx container that serves
-`/home/admin/jeremyfuksa.com/dist`. A `webhook` container runs
-`rebuild-astro.sh` on the `ghost-rebuild` hook, which `git pull`s and
-`pnpm build`s in place.
+`/home/admin/jeremyfuksa.com/dist`. A systemd path unit on the host
+(`rebuild-jeremyfuksa.path`) watches `~/.rebuild-trigger/rebuild` and
+runs `~/rebuild-jeremyfuksa.sh` (git pull + pnpm install + pnpm build).
 
 Deploy flow:
 
 ```bash
 git push origin main
-ssh admin@161.35.226.162 'docker exec webhook /scripts/rebuild-astro.sh'
+ssh admin@161.35.226.162 'touch /home/admin/.rebuild-trigger/rebuild'
 ```
 
-Build takes ~15-20s. No cache purge needed — nginx serves new files on
-the next request.
+Build takes ~20-30s on the droplet. No cache purge needed — nginx
+serves new files on the next request.
 
 ## Architecture
 
