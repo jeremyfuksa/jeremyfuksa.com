@@ -2,18 +2,7 @@
 title: The model of you stays.
 slug: the-model-of-you-stays
 excerpt: >-
-  Every company taking AI seriously is building some kind of a knowledge layer
-  right now. They're the way forward. They're going to make a lot of work
-  better. But, they rely on you to grow and thrive. And once you're out the door
-  — for good or bad reasons — they still have your stuff, and they own it
-  forever. That's the part that needs to change before it gets too late.
-
-
-  So here's a wacky idea.
-
-
-  We used to think we owned Photoshop. We didn't, technically — it was always a
-  license — but the license
+  Here's a wacky idea: knowledge workers should get to license what's in their heads to their employers the way we license Photoshop.
 publishedAt: '2026-05-01T20:00:08.000Z'
 tags:
   - AI

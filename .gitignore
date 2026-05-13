@@ -16,6 +16,7 @@ drafts/
 
 # Git worktrees
 .worktrees/
+.claude/worktrees/
 .superpowers/
 .playwright-mcp/
 
