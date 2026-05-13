@@ -34,7 +34,7 @@
   }
 
   // ---- TOC generation + scroll spy + sliding indicator -------------------
-  var content = document.querySelector('.gh-content');
+  var content = document.querySelector('.post-prose');
   var tocContainer = document.querySelector('.toc');
   var tocIndicator = null;
 
@@ -119,7 +119,7 @@
 
   // ---- Reading progress bar ---------------------------------------------
   var bar = document.querySelector('.reading-progress');
-  var article = document.querySelector('article.gh-content, .post-content.gh-content');
+  var article = document.querySelector('article.post-prose, .post-content.post-prose');
   if (bar && article) {
     var ticking = false;
     var updateBar = function () {
@@ -144,7 +144,7 @@
   // ---- Scroll reveal — images and cards ---------------------------------
   if (!reduceMotion && 'IntersectionObserver' in window) {
     var revealTargets = document.querySelectorAll(
-      '.gh-content img, .gh-content figure, .post-card-image, .post-card-featured-image, .methodology-tile'
+      '.post-prose img, .post-prose figure, .post-card-image, .post-card-featured-image, .methodology-tile'
     );
     if (revealTargets.length) {
       revealTargets.forEach(function (el) { el.classList.add('reveal'); });
