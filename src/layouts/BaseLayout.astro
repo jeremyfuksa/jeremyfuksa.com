@@ -43,13 +43,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
       document.documentElement.classList.add('dark');
     }
   </script>
-  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DJBY6FWMKN"></script>
-  <script is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DJBY6FWMKN');
-  </script>
 </head>
 <body class={bodyClass}>
   <SiteHeader currentPath={Astro.url.pathname} />
@@ -59,5 +52,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <SiteFooter />
   <div class="reading-progress" aria-hidden="true"></div>
   <script src="/scripts/main.js" is:inline></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DJBY6FWMKN');
+    addEventListener('load', () => {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DJBY6FWMKN';
+      document.head.appendChild(s);
+    });
+  </script>
 </body>
 </html>
