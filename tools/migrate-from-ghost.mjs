@@ -108,6 +108,18 @@ async function fetchAllPosts() {
 
 // ---------- Image handling ----------
 
+const CONTENT_TYPE_EXT = {
+  'image/jpeg': '.jpg',
+  'image/jpg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+  'image/gif': '.gif',
+  'image/svg+xml': '.svg',
+  'image/avif': '.avif',
+};
+
+const KNOWN_EXTS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', '.avif']);
+
 async function downloadImage(url, outDir, seen) {
   // Strip Ghost CDN size segment to get original.
   const cleaned = url.replace(/\/content\/images\/size\/w\d+\//, '/content/images/');
@@ -117,7 +129,16 @@ async function downloadImage(url, outDir, seen) {
   const sha1 = createHash('sha1').update(buf).digest('hex').slice(0, 8);
   if (seen.has(sha1)) return seen.get(sha1);
   const urlBase = basename(new URL(cleaned).pathname);
-  const safeBase = urlBase.replace(/[^a-zA-Z0-9._-]/g, '_');
+  let safeBase = urlBase.replace(/[^a-zA-Z0-9._-]/g, '_');
+  // Some Ghost-hosted images (Unsplash proxies, in particular) have no
+  // extension in their URL. Astro's asset pipeline needs one — derive it
+  // from Content-Type when the basename doesn't already include a known ext.
+  const hasKnownExt = [...KNOWN_EXTS].some((e) => safeBase.toLowerCase().endsWith(e));
+  if (!hasKnownExt) {
+    const ct = (res.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+    const ext = CONTENT_TYPE_EXT[ct] || '.bin';
+    safeBase = `${safeBase}${ext}`;
+  }
   const filename = `${sha1}-${safeBase}`;
   const fullPath = join(outDir, filename);
   if (!DRY_RUN) {
