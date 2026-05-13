@@ -13,6 +13,7 @@ interface Props {
 
 const { title, description, bodyClass = '', ogImage, noCanonical = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL(ogImage ?? '/images/jeremy-hero.jpg', Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -30,13 +31,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <meta property="og:title" content={title} />
   {description && <meta property="og:description" content={description} />}
   {!noCanonical && <meta property="og:url" content={canonical} />}
-  {ogImage && <meta property="og:image" content={ogImage} />}
+  <meta property="og:image" content={ogImageUrl} />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preload" href="/fonts/fraunces-latin-var.woff2" as="font" type="font/woff2" crossorigin />
   <script is:inline>
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
-    }
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (systemDark ? 'dark' : 'light');
+      if (stored) {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    })();
   </script>
 </head>
 <body class={bodyClass}>
