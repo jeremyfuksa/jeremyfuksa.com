@@ -199,6 +199,31 @@ async function transformPost(post, turndown) {
   let html = post.html || '';
   const $ = loadHtml(`<div id="__root__">${html}</div>`, null, false);
 
+  // 0. Rewrite <a href> values pointing at cms.jeremyfuksa.com.
+  //    - /#/portal/<x> are dead (members disabled): unlink, keep text.
+  //    - /<slug>/      → /writing/<slug>/ (most cross-post links shaped this way).
+  //    - Other paths   → drop the host so the link stays same-origin.
+  //    - /content/images/* left alone; handled by the image pass below.
+  $('a').each((_, el) => {
+    const $el = $(el);
+    const href = $el.attr('href');
+    if (!href) return;
+    const m = href.match(/^https?:\/\/cms\.jeremyfuksa\.com(\/.*)$/i);
+    if (!m) return;
+    const path = m[1];
+    if (path.startsWith('/#/portal/')) {
+      $el.replaceWith($el.contents());
+      return;
+    }
+    if (path.startsWith('/content/images/')) return;
+    const slugMatch = path.match(/^\/([a-z0-9][a-z0-9-]*)\/?$/i);
+    if (slugMatch) {
+      $el.attr('href', `/writing/${slugMatch[1]}/`);
+    } else {
+      $el.attr('href', path);
+    }
+  });
+
   // 1. Rewrite Ghost cards: convertible inline; lossy stashed.
   $('figure.kg-card').each((_, el) => {
     const $el = $(el);
