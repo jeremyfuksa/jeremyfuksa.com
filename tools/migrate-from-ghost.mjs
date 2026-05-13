@@ -294,8 +294,11 @@ async function transformPost(post, turndown) {
   };
   const excerpt = (post.custom_excerpt || post.excerpt || '').trim();
   if (excerpt) fm.excerpt = excerpt;
-  if (post.published_at) fm.publishedAt = post.published_at;
-  if (post.updated_at && post.updated_at !== post.published_at) {
+  // Drafts that were never published return null for published_at; fall back
+  // so the required schema field is always populated.
+  const publishedAt = post.published_at || post.updated_at || post.created_at;
+  if (publishedAt) fm.publishedAt = publishedAt;
+  if (post.updated_at && post.updated_at !== publishedAt) {
     fm.updatedAt = post.updated_at;
   }
   if (post.featured) fm.featured = true;
