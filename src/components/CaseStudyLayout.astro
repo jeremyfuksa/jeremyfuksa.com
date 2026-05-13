@@ -1,0 +1,136 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import SubscribeCta from './SubscribeCta.astro';
+import { readingTime } from '~/lib/format';
+
+interface Props {
+  title: string;
+  eyebrow: string;
+  tagline: string;
+  role: string;
+  organization?: string;
+  timeline: string;
+  pullquote?: string;
+  facts?: { label: string; value: string }[];
+  stats?: { value: string; label: string }[];
+  links?: { label: string; href: string }[];
+  readingMinutes?: number;
+  coverImage?: ImageMetadata;
+  coverImageAlt?: string;
+}
+
+const {
+  title,
+  eyebrow,
+  tagline,
+  role,
+  organization,
+  timeline,
+  pullquote,
+  facts,
+  stats,
+  links,
+  readingMinutes,
+  coverImage,
+  coverImageAlt,
+} = Astro.props;
+
+const readtime = readingTime(readingMinutes);
+---
+
+<div class="casestudy-page">
+  <a href="/work/" class="casestudy-back">← Work</a>
+
+  <header class="casestudy-header">
+    <div class="casestudy-eyebrow">{eyebrow}</div>
+    <h1 class="casestudy-title">{title}</h1>
+    <p class="casestudy-tagline" set:html={tagline}></p>
+    <div class="post-header-meta">
+      {readtime && <span class="post-card-readtime">{readtime}</span>}
+    </div>
+  </header>
+
+  {coverImage && (
+    <figure class="casestudy-cover">
+      <Image
+        src={coverImage}
+        alt={coverImageAlt ?? ''}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        widths={[640, 960, 1280, 1920]}
+        sizes="(min-width: 1280px) 1280px, 100vw"
+      />
+    </figure>
+  )}
+
+  <div class="casestudy-body">
+    <div class="casestudy-prose post-prose">
+      <slot />
+    </div>
+
+    <aside class="casestudy-sidebar">
+      <div class="cs-meta-group">
+        <div class="cs-meta-label">Role</div>
+        <div class="cs-meta-value">{role}</div>
+      </div>
+      {organization && (
+        <div class="cs-meta-group">
+          <div class="cs-meta-label">Organization</div>
+          <div class="cs-meta-value">{organization}</div>
+        </div>
+      )}
+      <div class="cs-meta-group">
+        <div class="cs-meta-label">Timeline</div>
+        <div class="cs-meta-value">{timeline}</div>
+      </div>
+
+      {stats && stats.length > 0 && (
+        <>
+          <hr class="cs-divider" />
+          <div class="cs-stats">
+            {stats.map((s) => (
+              <div class="cs-stat">
+                <div class="cs-stat-value">{s.value}</div>
+                <div class="cs-stat-label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      {facts && facts.length > 0 && (
+        <>
+          <hr class="cs-divider" />
+          <dl class="cs-fact-list">
+            {facts.map((f) => (
+              <div>
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </>
+      )}
+
+      {pullquote && (
+        <>
+          <hr class="cs-divider" />
+          <blockquote class="cs-pullquote">{pullquote}</blockquote>
+        </>
+      )}
+
+      {links && links.length > 0 && (
+        <>
+          <hr class="cs-divider" />
+          {links.map((l) => (
+            <a href={l.href} class="cs-link" target="_blank" rel="noopener">{l.label}</a>
+          ))}
+        </>
+      )}
+    </aside>
+  </div>
+
+  <SubscribeCta />
+</div>

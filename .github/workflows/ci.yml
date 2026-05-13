@@ -10,12 +10,6 @@ jobs:
   astro:
     name: astro
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: site
-    env:
-      GHOST_URL: ${{ secrets.GHOST_URL }}
-      GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +21,7 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-          cache-dependency-path: site/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install
         run: pnpm install --frozen-lockfile

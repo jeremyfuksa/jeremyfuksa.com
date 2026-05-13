@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import TagPill from './TagPill.astro';
+import { isoDate, shortDate, readingTime } from '~/lib/format';
+
+interface Props {
+  title: string;
+  excerpt?: string;
+  publishedAt: Date;
+  updatedAt?: Date;
+  tags: string[];
+  author: string;
+  readingMinutes?: number;
+  coverImage?: ImageMetadata;
+  coverImageAlt?: string;
+  coverImageCaption?: string;
+  isDraft?: boolean;
+}
+
+const {
+  title,
+  excerpt,
+  publishedAt,
+  tags,
+  author,
+  readingMinutes,
+  coverImage,
+  coverImageAlt,
+  coverImageCaption,
+  isDraft,
+} = Astro.props;
+
+const readtime = readingTime(readingMinutes);
+const showDraftBanner = isDraft && import.meta.env.DEV;
+---
+
+{showDraftBanner && (
+  <div class="draft-banner">DRAFT — visible only in dev</div>
+)}
+
+<header class="post-header">
+  <a href="/writing/" class="post-header-back">&larr; All writing</a>
+  <h1 class="post-header-title">{title}</h1>
+  <div class="post-header-meta">
+    <TagPill tags={tags} />
+    <span class="post-card-date">
+      <time datetime={isoDate(publishedAt)}>{shortDate(publishedAt)}</time>
+    </span>
+    {readtime && <span class="post-card-readtime">{readtime}</span>}
+  </div>
+  {excerpt && <p class="post-header-excerpt">{excerpt}</p>}
+  {coverImage && (
+    <figure class="post-header-image">
+      <Image
+        src={coverImage}
+        alt={coverImageAlt ?? title}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+        widths={[640, 960, 1280, 1920]}
+        sizes="(min-width: 1280px) 1280px, 100vw"
+      />
+      {coverImageCaption && (
+        <figcaption set:html={coverImageCaption} />
+      )}
+    </figure>
+  )}
+  <div class="post-header-byline">
+    <div class="post-header-avatar"></div>
+    <div>
+      <div class="post-header-author-name">{author}</div>
+    </div>
+  </div>
+</header>
+
+<div class="post-layout">
+  <article class="post-content post-prose">
+    <slot />
+  </article>
+
+  <aside class="post-sidebar">
+    <div class="post-sidebar-title">On this page</div>
+    <nav class="toc"></nav>
+    <slot name="sidebar" />
+  </aside>
+</div>
