@@ -3346,13 +3346,21 @@
    package's default styles by passing an empty fragment to its CSS slot.
    ========================================================================== */
 
+/* The wrapper <span class="post-share-inline"> exists only because we
+   can't add a class to the package's .astro-social-share div. Make it
+   layout-transparent so .astro-social-share becomes a direct flex child
+   of .post-header-meta — that's what gets the row's align-items: center. */
+.post-share-inline {
+  display: contents;
+}
+
 .post-share-inline .astro-social-share {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-3);
   margin: 0;
   height: auto;
-  vertical-align: middle;
+  line-height: 1;
 }
 
 .post-share-inline .social-share-btn {
@@ -3368,8 +3376,16 @@
 }
 
 .post-share-inline .social-share-btn svg {
-  width: 14px;
-  height: 14px;
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+}
+
+/* Override the package's hardcoded per-network hover fill (e.g. X and
+   Threads default to #000, which is invisible in dark mode). currentColor
+   inherits our accent color set on the parent <a>:hover. */
+.post-share-inline .social-share-btn svg:hover,
+.post-share-inline .social-share-btn:hover svg {
   fill: currentColor;
 }
 
@@ -3418,6 +3434,13 @@
 .post-share .social-share-btn svg {
   width: 22px;
   height: 22px;
+  fill: currentColor;
+}
+
+/* Same hover override as the inline placement — neutralize per-network
+   fills so hover always reads against the page background. */
+.post-share .social-share-btn svg:hover,
+.post-share .social-share-btn:hover svg {
   fill: currentColor;
 }
 
