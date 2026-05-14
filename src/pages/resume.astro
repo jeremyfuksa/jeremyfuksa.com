@@ -1,0 +1,252 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+interface Role {
+  company: string;
+  title: string;
+  start: string;
+  end: string;
+  bullets: string[];
+}
+
+const skillsByDomain: Array<{ heading: string; items: string[] }> = [
+  {
+    heading: 'Design Systems',
+    items: [
+      'Component library architecture',
+      'Design token strategy',
+      'Accessibility (WCAG 2.1 AA, axe-core)',
+      'Documentation systems',
+      'Cross-team governance',
+      'Figma libraries + variables',
+    ],
+  },
+  {
+    heading: 'UX Strategy & Leadership',
+    items: [
+      'Product design for regulated industries',
+      'Healthcare workflows (HIPAA)',
+      'Enterprise SaaS',
+      'Team leadership & mentorship',
+      'Hiring & performance',
+      'Cross-functional collaboration',
+    ],
+  },
+  {
+    heading: 'AI Design Infrastructure',
+    items: [
+      'RAG pipeline design',
+      'Vector databases (Pinecone, Weaviate)',
+      'MCP server design',
+      'Knowledge representation',
+      'Figma Make / generative UI workflows',
+      'Domain Foundation methodology',
+    ],
+  },
+  {
+    heading: 'Frontend Technologies',
+    items: [
+      'React, TypeScript',
+      'Astro, Next.js',
+      'CSS architecture, design tokens',
+      'Web Components',
+      'Storybook, component testing',
+      'Tailwind / shadcn / Campfire',
+    ],
+  },
+  {
+    heading: 'Tools & Platforms',
+    items: [
+      'Figma (advanced)',
+      'Oracle Redwood design system',
+      'Cerner Terra',
+      'GitHub Actions / CI',
+      'n8n, Home Assistant',
+      'Claude Code, Cursor',
+    ],
+  },
+  {
+    heading: 'Adjacent Practice',
+    items: [
+      'Amateur radio (KF0NUI)',
+      'SDR + Meshtastic',
+      'Embedded prototyping (Pi, ESP32)',
+      'Songwriting, audio production',
+      'Long-form writing',
+      'Photography',
+    ],
+  },
+];
+
+const experience: Role[] = [
+  {
+    company: 'Oracle Health',
+    title: 'Manager, UX Design (Design Systems & AI)',
+    start: '2022',
+    end: '2026',
+    bullets: [
+      'Led a distributed UX design systems team through the Cerner-to-Oracle acquisition transition: kept Terra stable through corporate integration, then built a Redwood-themed bridge layer, then rebuilt healthcare components on Oracle Redwood for the next-generation EHR.',
+      'Founded and led the Moonbird initiative — a RAG-backed AI design pipeline with a vector database, MCP server, and Figma Make integration that generated design-system-aligned UI from natural-language briefs.',
+      'Developed the Domain Foundation methodology for encoding institutional design knowledge as machine-readable knowledge layers an AI can reason with.',
+      'Laid off as part of the March 2026 Oracle workforce reduction (the 5 a.m. 30,000-person email).',
+    ],
+  },
+  {
+    company: 'Cerner Corporation',
+    title: 'Senior UX Designer, Terra Design System',
+    start: '2019',
+    end: '2022',
+    bullets: [
+      'UX Foundations team member on Terra — Cerner’s open-source React component library that replaced the aging Bootstrap layer for hundreds of product teams shipping Cerner Millennium.',
+      '80+ components, 200+ icons, full WCAG 2.1 AA audit via axe-core, Apache 2.0 license, used across the entire Millennium suite.',
+      'Designer working directly in the React codebase — co-owning component design and implementation alongside engineering.',
+    ],
+  },
+  {
+    company: 'Orange Flame Design',
+    title: 'Principal / Founder',
+    start: '2016',
+    end: '2019',
+    bullets: [
+      'Independent UX strategy and product design practice. Clients included small-to-mid-sized SaaS, agencies, and healthcare adjacent product teams.',
+      'Engagements ran from short-form audits to long-form fractional design leadership.',
+    ],
+  },
+  {
+    company: 'Clickfarm Interactive',
+    title: 'Director of Interaction Design',
+    start: '2014',
+    end: '2016',
+    bullets: ['Led the interaction design practice for a Kansas City digital agency.'],
+  },
+  {
+    company: 'Sullivan Higdon & Sink (Signal Theory)',
+    title: 'Creative Technologist / Social Media Lead',
+    start: '2011',
+    end: '2014',
+    bullets: ['Ran social and creative technology work for a portfolio of veterinary brands and other accounts.'],
+  },
+  {
+    company: 'Barkley',
+    title: 'Chief Storyteller / Senior Interactive Designer',
+    start: '2008',
+    end: '2011',
+    bullets: ['Pitch deck and interactive design work for the agency’s CCO.'],
+  },
+  {
+    company: 'Premier Studios',
+    title: 'Motion Designer',
+    start: '2005',
+    end: '2008',
+    bullets: ['Avid DS|HD motion design for Dave Ramsey, John Deere, Cessna, and other accounts.'],
+  },
+  {
+    company: 'Skyline Media Group',
+    title: 'Designer / Editor (employee #3)',
+    start: '2002',
+    end: '2005',
+    bullets: ['TV commercial production in a converted Honda dealership in Norman, Oklahoma.'],
+  },
+  {
+    company: 'med4home.com',
+    title: 'Web Designer',
+    start: '1999',
+    end: '2002',
+    bullets: ['Designed the customer-facing online pharmacy and internal intranet for a Liberty, MO COPD and asthma pharmacy. Acquired by Lincare Holdings in 2002.'],
+  },
+];
+
+const sideProjects = [
+  { name: 'Bear Paw', body: 'Daily planning app — early design phase.' },
+  { name: 'Kerchunk', body: 'Mechanical keyboard build companion.' },
+  { name: 'Meshtastic KC', body: 'Off-grid LoRa mesh network for the Kansas City metro.' },
+  { name: 'KF0NUI', body: 'Amateur radio — Technician license, General on the study pile.' },
+  { name: 'Campfire', body: 'Personal design system published to npm — @jeremyfuksa/campfire.' },
+];
+---
+
+<BaseLayout
+  title="Resume — Jeremy Fuksa"
+  description="Structured career data for Jeremy Fuksa. Design systems, UX strategy, AI design infrastructure. Kansas City."
+  bodyClass="resume-body"
+>
+  <link slot="head" rel="stylesheet" media="print" href="/print-resume.css" />
+
+  <main class="resume">
+    <header class="resume-header">
+      <h1>Jeremy Fuksa</h1>
+      <p class="resume-title">Designer, design systems lead, AI design infrastructure</p>
+      <ul class="resume-contact">
+        <li>Kansas City, MO</li>
+        <li><a href="mailto:hello@jeremyfuksa.com">hello@jeremyfuksa.com</a></li>
+        <li><a href="https://linkedin.com/in/jeremyfuksa">LinkedIn</a></li>
+        <li><a href="https://github.com/jeremyfuksa">GitHub</a></li>
+        <li><a href="https://jeremyfuksa.com">jeremyfuksa.com</a></li>
+      </ul>
+    </header>
+
+    <section class="resume-section" aria-labelledby="seeking-heading">
+      <h2 id="seeking-heading">Currently seeking</h2>
+      <ul class="resume-bullets">
+        <li><strong>Roles:</strong> Senior IC through Director — Senior Product Designer, Staff, Principal, Design Systems Manager, UX Manager, UX Director.</li>
+        <li><strong>Engagement models:</strong> Full-time, contract, or fractional.</li>
+        <li><strong>Focus areas:</strong> Design systems, AI design pipelines, and the institutional knowledge layer that connects the two.</li>
+        <li><strong>Location:</strong> Remote or hybrid, Kansas City base, no relocation.</li>
+      </ul>
+    </section>
+
+    <section class="resume-section" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills &amp; expertise</h2>
+      <div class="resume-skills-grid">
+        {skillsByDomain.map((domain) => (
+          <div class="resume-skill-block">
+            <h3>{domain.heading}</h3>
+            <ul>
+              {domain.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="resume-section" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <ol class="resume-experience">
+        {experience.map((role) => (
+          <li class="resume-role">
+            <header class="resume-role-header">
+              <h3 class="resume-role-company">{role.company}</h3>
+              <span class="resume-role-dates">
+                <time>{role.start}</time>
+                <span aria-hidden="true">&ndash;</span>
+                <time>{role.end}</time>
+              </span>
+            </header>
+            <p class="resume-role-title">{role.title}</p>
+            <ul class="resume-bullets">
+              {role.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="resume-section" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <p><strong>Oklahoma State University</strong> &middot; Stillwater, OK</p>
+      <p class="resume-muted">Undergraduate studies in mass communications. Self-taught web design (1996 onward). The web is what stuck.</p>
+    </section>
+
+    <section class="resume-section" aria-labelledby="side-heading">
+      <h2 id="side-heading">Side projects</h2>
+      <ul class="resume-side-projects">
+        {sideProjects.map((project) => (
+          <li>
+            <strong>{project.name}</strong> &mdash; {project.body}
+          </li>
+        ))}
+      </ul>
+      <p class="resume-muted">Full Workshop at <a href="/workshop/">/workshop/</a>.</p>
+    </section>
+  </main>
+</BaseLayout>

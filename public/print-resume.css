@@ -1,0 +1,145 @@
+/* Print stylesheet for /resume/.
+   Hides the nav, footer, and tinkering strip; resets backgrounds to white;
+   tightens type so the document fits two to three letter-size pages.
+   Linked only from src/pages/resume.astro via <link rel="stylesheet"
+   media="print"> in BaseLayout's head slot. */
+
+@media print {
+  /* Hide global chrome */
+  .nav,
+  .site-footer,
+  .tinkering-strip,
+  .reading-progress,
+  .theme-toggle {
+    display: none !important;
+  }
+
+  /* Reset surfaces for paper */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  body {
+    font-size: 10pt;
+    line-height: 1.35;
+  }
+
+  a {
+    color: #000000 !important;
+    text-decoration: none;
+  }
+
+  a[href^="http"]::after,
+  a[href^="mailto"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 8pt;
+    color: #555;
+  }
+
+  /* Resume layout: tighten margins */
+  .resume {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .resume-header h1 {
+    font-size: 18pt;
+    margin: 0 0 4pt;
+  }
+
+  .resume-header .resume-title {
+    font-size: 11pt;
+    margin: 0 0 6pt;
+  }
+
+  .resume-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8pt;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12pt;
+    font-size: 9pt;
+  }
+
+  .resume-section {
+    page-break-inside: avoid;
+    margin-bottom: 10pt;
+  }
+
+  .resume-section h2 {
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1pt solid #000;
+    padding-bottom: 2pt;
+    margin: 0 0 6pt;
+  }
+
+  .resume-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8pt;
+  }
+
+  .resume-skill-block h3 {
+    font-size: 10pt;
+    margin: 0 0 2pt;
+  }
+
+  .resume-skill-block ul {
+    margin: 0;
+    padding-left: 14pt;
+    font-size: 9pt;
+  }
+
+  .resume-role {
+    page-break-inside: avoid;
+    margin-bottom: 8pt;
+  }
+
+  .resume-role-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .resume-role-company {
+    font-size: 11pt;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .resume-role-dates {
+    font-size: 9pt;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .resume-role-title {
+    font-size: 10pt;
+    font-style: italic;
+    margin: 0 0 2pt;
+  }
+
+  .resume-bullets {
+    margin: 0;
+    padding-left: 14pt;
+  }
+
+  .resume-bullets li {
+    margin-bottom: 2pt;
+  }
+
+  .resume-side-projects {
+    margin: 0;
+    padding-left: 14pt;
+  }
+
+  .resume-muted {
+    font-size: 9pt;
+    color: #555;
+  }
+}

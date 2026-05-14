@@ -1,30 +1,59 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-
-const lede = "Open to full-time roles from Senior IC through Director, and to contract, fractional, or workshop engagements while the search runs. Remote or hybrid, Kansas City base, no relocation.";
-
-const bodyHtml = `<h2>Full-time roles</h2><p>Open to Work titles: Senior Product Designer, Staff Designer, Principal Designer, Design Systems Manager, UX Manager, UX Director.</p><p>Best fit is a team building in a regulated or high-consequence domain — healthcare, fintech, infrastructure, AI tooling, government — or a team standing up the AI design pipeline work that ties design systems to model-generated UI. Past employers have been Cerner and Oracle Health; the lessons travel.</p><p>Not a fit: full relocation out of Kansas City, or on-site five days a week.</p><h2>Contract and fractional</h2><p>Available for design-system audits, AI design pipeline prototyping (RAG + vector database + MCP server, integrated with whatever generation surface you're using), and fractional UX leadership for teams without a head of design. Typical engagements run six to twelve weeks for an audit or prototype, longer for fractional leadership.</p><p>Day rates on request.</p><h2>Workshops and advisory</h2><p>Half-day or full-day formats:</p><ul><li><strong>AI design pipelines.</strong> What a RAG-backed pipeline looks like end to end, where it tends to fail, and what your design org has to produce to feed it.</li><li><strong>Domain Foundation methodology.</strong> Encoding institutional design expertise as layered, machine-readable knowledge an AI can reason with. The case study lives at <a href="/work/domain-foundation/">/work/domain-foundation/</a>.</li><li><strong>Design-system governance.</strong> What I learned across three and a half years on Terra at Cerner — the gap between standards and shipped components, and the practices that close it.</li></ul><p>Best fit for design leadership, design-system teams, and product orgs trying to figure out where AI fits in their tooling without burning a quarter.</p>`;
 ---
 
 <BaseLayout
   title="Work with me — Jeremy Fuksa"
-  description="Available for full-time roles from Senior IC through Director, plus contract, fractional, and workshop engagements. Kansas City, remote-friendly."
+  description="UX and product design leadership. Healthcare, enterprise, SaaS, and AI integration in design workflows. Kansas City."
 >
-  <article class="about-page">
-    <header class="about-header">
+  <article class="work-with-me-page">
+    <header class="work-with-me-header">
       <h1>Work with me</h1>
-      <p class="about-lede">{lede}</p>
+      <p class="work-with-me-lede">I’m a UX and product design leader with twenty-plus years of experience — most of it inside organizations going through some version of transition. New leadership, new tech, new market pressure. The problems that tend to land on my desk are the ones that resist easy framing.</p>
+      <p class="work-with-me-lede">I work with a small number of clients at a time. That’s intentional.</p>
     </header>
 
-    <div class="post-prose about-prose" set:html={bodyHtml} />
+    <section class="work-with-me-section" aria-labelledby="what-i-do">
+      <h2 id="what-i-do" class="work-with-me-section-title">What I do</h2>
+      <h3 class="work-with-me-sub">UX strategy and design leadership</h3>
+      <p>I work at the intersection of product, design, and organizational reality. That means I can design the thing and I can also help you figure out what the thing should be — and whether your team is set up to build and maintain it.</p>
+      <p>The work usually falls into a few categories:</p>
+      <ul class="work-with-me-list">
+        <li><strong>Product design for complex problems.</strong> Healthcare, enterprise, SaaS. Workflows that have to work for people who have no patience for bad software because their job depends on it. I’ve shipped within HIPAA constraints, inside Oracle’s ecosystem, inside organizations where “just redesign it” wasn’t an option.</li>
+        <li><strong>Design system work.</strong> Building them, documenting them, rescuing ones that drifted. I have opinions about when a design system helps and when it becomes the project.</li>
+        <li><strong>Design leadership and mentorship.</strong> Fractional design leadership, team coaching, process work. If your design team is talented but not quite clicking, that’s a thing I can help with.</li>
+        <li><strong>AI integration in design workflows.</strong> I’m actively using AI tools in my practice and thinking carefully about where they help and where they create false confidence. If your team is trying to figure out what this actually changes, I can think through it with you from inside the work.</li>
+      </ul>
+    </section>
 
-    <section class="about-cta-section">
-      <h2 class="about-cta-title">Get in touch</h2>
-      <p class="about-cta-body">Email is the fastest path. Tell me which of the three above fits — or that none of them does, and what you're actually trying to do.</p>
-      <div class="about-cta-actions">
-        <a href="mailto:hello@jeremyfuksa.com" class="hero-cta">Email me</a>
-        <a href="https://linkedin.com/in/jeremyfuksa" class="hero-cta-secondary">LinkedIn &rarr;</a>
-      </div>
+    <section class="work-with-me-section" aria-labelledby="how-i-work">
+      <h2 id="how-i-work" class="work-with-me-section-title">How I work</h2>
+      <p class="work-with-me-sub-note">A few things worth knowing upfront</p>
+      <ul class="work-with-me-list">
+        <li>I’m direct. I’ll tell you what I see, including the parts that might be uncomfortable. That’s not a style choice — it’s the thing that makes the engagement worth it.</li>
+        <li>I work best when I have access to the people who use the product, not just the people who built it. User proximity is non-negotiable for me. Remote research works. Secondhand research usually doesn’t.</li>
+        <li>I don’t take on projects where I can’t do the work well. That means I’ll tell you if you need something I’m not the right fit for. The design industry is small enough that a referral is worth more than a contract I shouldn’t have taken.</li>
+        <li>I’m based in Kansas City. I work remotely and I travel for the right project.</li>
+      </ul>
+    </section>
+
+    <section class="work-with-me-section work-with-me-availability" aria-labelledby="availability">
+      <h2 id="availability" class="work-with-me-section-title">Current availability</h2>
+      <p class="work-with-me-sub-note">What’s open</p>
+      <p>I’m selectively available for project and fractional engagements. I keep my plate thin enough to actually think.</p>
+      <p>If you have something specific in mind, the fastest path is a direct email. Tell me what you’re working on, where it’s stuck, and roughly what you’re looking for. I’ll tell you honestly whether it’s a fit.</p>
+      <p class="work-with-me-email"><a href="mailto:hello@jeremyfuksa.com">hello@jeremyfuksa.com</a></p>
+    </section>
+
+    <section class="work-with-me-section" aria-labelledby="not-a-fit">
+      <h2 id="not-a-fit" class="work-with-me-section-title">Not the right fit</h2>
+      <p class="work-with-me-sub-note">What I don’t do</p>
+      <p>Logo and brand identity work. Visual production without strategy. Short-turnaround execution projects where there’s no room to ask questions. Projects where the design decisions have already been made and you need someone to draw them.</p>
+      <p>If you’re looking for those things, I’m happy to point you toward someone who does them well.</p>
+    </section>
+
+    <section class="work-with-me-footnote">
+      <p>The biography is on <a href="/about/">the About page</a>. The work is in <a href="/work/">the case studies</a>. The structured career data is on <a href="/resume/">the resume</a>.</p>
     </section>
   </article>
 </BaseLayout>
