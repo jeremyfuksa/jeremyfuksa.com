@@ -2,7 +2,7 @@
    The Cocktail Napkin — Main Stylesheet
    ========================================================================== */
 
-@import 'campfire.css';   /* foundation: palette + semantic tokens + typography globals */
-@import 'tokens.css';     /* theme overrides: Fraunces, nav/footer/accent colors, layout vars */
-@import 'base.css';
-@import 'components.css';
+@import '@jeremyfuksa/campfire/styles.css';  /* foundation: palette, semantic tokens, typography globals, Fraunces/Hanken/Work Sans/Fira Code */
+@import './tokens.css';                       /* site overrides: amber accent, airy dark, editorial Fraunces token, layout */
+@import './base.css';                         /* reset + heading rules + animations */
+@import './components.css';                   /* component styles */
