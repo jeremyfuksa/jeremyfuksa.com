@@ -1,0 +1,72 @@
+---
+/*
+  The tinkering strip. Renders a three-signal row between nav and hero.
+  Signals (GitHub last push, backyard temperature, now playing) are filled
+  client-side from /api/tinkering.json — that endpoint is wired in Phase 5.
+  Until then, the strip renders its fallback copy server-side, so the layout
+  is never empty and there's no spinner.
+*/
+---
+
+<aside class="tinkering-strip" id="tinkering-strip" aria-label="Live signals">
+  <span class="tinkering-cell" id="strip-github">github.com/jeremyfuksa &middot; quiet lately</span>
+  <span class="tinkering-cell tinkering-cell-center" id="strip-temperature">backyard sensor offline</span>
+  <span class="tinkering-cell tinkering-cell-right" id="strip-now-playing">nothing playing right now</span>
+</aside>
+
+<script is:inline>
+  (function () {
+    async function loadStrip() {
+      try {
+        const res = await fetch('/api/tinkering.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        render(data);
+      } catch (_e) {
+        // Network or parse error — strip keeps fallback copy.
+      }
+    }
+
+    function render(data) {
+      setText('strip-github', renderGithub(data && data.github));
+      setText('strip-temperature', renderTemp(data && data.temperature));
+      setText('strip-now-playing', renderNowPlaying(data && data.nowPlaying));
+    }
+
+    function setText(id, value) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function renderGithub(g) {
+      if (!g || g.stale || !g.repo || !g.relative) {
+        return 'github.com/jeremyfuksa · quiet lately';
+      }
+      return 'last pushed to ' + g.repo + ' · ' + g.relative;
+    }
+
+    function renderTemp(t) {
+      if (!t || typeof t.fahrenheit !== 'number') {
+        return 'backyard sensor offline';
+      }
+      return t.fahrenheit + '°F in the backyard';
+    }
+
+    function renderNowPlaying(n) {
+      if (!n) return 'nothing playing right now';
+      if (!n.playing) {
+        return n.state === 'paused' ? 'nothing playing right now' : 'not listening to anything';
+      }
+      if (n.title && n.artist) return '“' + n.title + '” by ' + n.artist;
+      if (n.title) return '“' + n.title + '”';
+      if (n.artist) return 'something by ' + n.artist;
+      return 'nothing playing right now';
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadStrip);
+    } else {
+      loadStrip();
+    }
+  })();
+</script>
