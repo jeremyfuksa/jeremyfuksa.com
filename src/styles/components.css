@@ -858,21 +858,14 @@
 
 /* ---------- Principles section ---------- */
 
-/* Mauve-earth surface for the section's filter job — dusty, considered,
-   like an old velvet study curtain rather than an alarm. Mixed into the
-   terracotta family so the warm undertone holds with the rest of the
-   site, and the luminance stays in the airy ladder. */
+/* Mauve-earth surface for the section's filter job. Pure token —
+   Campfire's .dark cascade swaps mauve-earth between #c898ad (light)
+   and #9b6b7f (dark) automatically. */
 .principles {
   padding: var(--spacing-16) var(--spacing-8);
-  background: color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-200));
-  border-top: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-300));
-  border-bottom: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-300));
-}
-
-.dark .principles {
-  background: color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-950));
-  border-top-color: color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-900));
-  border-bottom-color: color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-900));
+  background: var(--mauve-earth);
+  border-top: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth), black 15%);
+  border-bottom: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth), black 15%);
 }
 
 .principles-inner {
