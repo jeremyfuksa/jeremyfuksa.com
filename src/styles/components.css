@@ -1778,7 +1778,6 @@
   font-size: var(--text-lg);
   line-height: 1.55;
   color: var(--text-secondary);
-  max-width: 60ch;
   margin: var(--spacing-4) 0 0;
 }
 
