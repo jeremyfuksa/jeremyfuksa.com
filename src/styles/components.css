@@ -1036,21 +1036,20 @@
   opacity: 0.20;
 }
 
-/* Cutting-mat grid overlay — faint white lines on a 40px cell, with a
-   subtly heavier major line every 5th cell (every 200px), matching how
-   a self-healing mat reads at a glance. Sits above the noise but below
-   the content. */
+/* Cutting-mat grid overlay — minor lines every 40px, heavier major
+   lines every 5th cell (200px). Dark lines in light mode, white in
+   dark mode; same opacity values either way. */
 .workshop-bridge::after {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
     /* major lines (every 200px) */
-    linear-gradient(to right, rgba(255, 255, 255, 0.10) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.10) 1px, transparent 1px),
+    linear-gradient(to right, rgba(0, 0, 0, 0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.10) 1px, transparent 1px),
     /* minor lines (every 40px) */
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
   pointer-events: none;
   z-index: -1;
