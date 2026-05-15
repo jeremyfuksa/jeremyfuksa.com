@@ -3897,6 +3897,18 @@
   color: var(--text-primary);
 }
 
+a.workshop-entry-link {
+  color: var(--color-accent-ui);
+  text-decoration: underline;
+  text-decoration-thickness: var(--border-hairline);
+  text-underline-offset: 4px;
+  transition: color var(--transition-fast);
+}
+
+a.workshop-entry-link:hover {
+  color: var(--color-accent-hover);
+}
+
 .workshop-entry-sep {
   color: var(--text-tertiary);
 }

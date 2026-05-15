@@ -6,6 +6,7 @@ interface WorkshopEntry {
   status: string;
   body: string;
   note?: string;
+  link?: string;
 }
 
 const rightNow: WorkshopEntry[] = [
@@ -28,6 +29,7 @@ const rightNow: WorkshopEntry[] = [
     name: 'The algorithm experiment',
     status: 'Ongoing',
     body: 'I stopped touching the Apple Music shuffle controls. No skips, no stars, no explicit thumbs-down. Three months in. I wanted to know what it would surface if I got out of its way. The answer so far is: things I forgot I loved and a lot of 90s country.',
+    link: '/writing/the-algorithm-and-i-were-in-a-rut/',
   },
   {
     name: 'This site',
@@ -92,7 +94,9 @@ const everythingElse: WorkshopEntry[] = [
         {rightNow.map((entry) => (
           <li class="workshop-entry">
             <div class="workshop-entry-header">
-              <span class="workshop-entry-name">{entry.name}</span>
+              {entry.link
+                ? <a href={entry.link} class="workshop-entry-name workshop-entry-link">{entry.name}</a>
+                : <span class="workshop-entry-name">{entry.name}</span>}
               <span class="workshop-entry-sep" aria-hidden="true">&mdash;</span>
               <span class="workshop-entry-status">{entry.status}</span>
             </div>
@@ -110,7 +114,9 @@ const everythingElse: WorkshopEntry[] = [
         {everythingElse.map((entry) => (
           <li class="workshop-entry">
             <div class="workshop-entry-header">
-              <span class="workshop-entry-name">{entry.name}</span>
+              {entry.link
+                ? <a href={entry.link} class="workshop-entry-name workshop-entry-link">{entry.name}</a>
+                : <span class="workshop-entry-name">{entry.name}</span>}
               <span class="workshop-entry-sep" aria-hidden="true">&mdash;</span>
               <span class="workshop-entry-status">{entry.status}</span>
             </div>
