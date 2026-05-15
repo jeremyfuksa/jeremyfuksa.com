@@ -123,10 +123,15 @@
 
 /* Dark mode — only override where rationale doc diverges from Campfire. */
 .dark {
-  /* Airy dark target: page body sits at neutral-900, not Campfire's default
-     neutral-950. The brighter base lets the article surface (neutral-700)
-     come forward spatially without the page feeling heavy. */
-  --bg-base: var(--neutral-900);
+  /* Warm the dark surface stack subtly. 8% secondary-950 (deep leather
+     brown) mixed into each neutral surface step. Imperceptible as a hue
+     at this ratio but unifies the cool ladder with the warm headings,
+     amber accent, and mauve principles — so they feel like features of
+     a warm room rather than warm islands on slate. Footer stays
+     primary-900 (the intentional temperature break). */
+  --bg-base: color-mix(in oklch, var(--secondary-950) 8%, var(--neutral-900));
+  --bg-subtle: color-mix(in oklch, var(--secondary-950) 8%, var(--neutral-900));
+  --bg-muted: color-mix(in oklch, var(--secondary-950) 8%, var(--neutral-800));
 
   /* WCAG fix: Campfire's dark --text-secondary = neutral-400 fails on the
      neutral-700 article surface (2.77:1). Rationale: neutral-300 (4.17:1),
@@ -165,7 +170,7 @@
   --color-logo-fg: var(--neutral-900);
 
   /* Nav surface — neutral-800, off the old burnt-orange #8a3308. */
-  --color-nav-bg: var(--neutral-800);
+  --color-nav-bg: color-mix(in oklch, var(--secondary-950) 8%, var(--neutral-800));
   --color-nav-border: var(--neutral-700);
   --color-nav-author: var(--text-primary);
   --color-nav-link: var(--text-primary);
