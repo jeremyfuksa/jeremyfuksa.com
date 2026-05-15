@@ -1012,10 +1012,9 @@
   border-top: var(--border-hairline) solid color-mix(in oklch, var(--success-400) 30%, var(--neutral-300));
 }
 
-/* Real Gaussian noise tile — 512x512 monochrome, pre-rendered. Tiles
-   seamlessly enough at this density that the repeat isn't readable.
-   Layered as a ::before so it sits over the section background but
-   under the content. */
+/* Real Gaussian noise tile — 512x512 monochrome, pre-rendered. No
+   blend mode (it double-attenuates with opacity); plain opacity lets
+   the grain land cleanly on the surface. */
 .workshop-bridge::before {
   content: '';
   position: absolute;
@@ -1023,8 +1022,7 @@
   background-image: url('/images/noise-tile.png');
   background-repeat: repeat;
   background-size: 512px 512px;
-  opacity: 0.12;
-  mix-blend-mode: multiply;
+  opacity: 0.25;
   pointer-events: none;
   z-index: -1;
 }
@@ -1035,9 +1033,7 @@
 }
 
 .dark .workshop-bridge::before {
-  /* Dark surfaces want the grain lighter, not darker — flip the blend. */
-  mix-blend-mode: screen;
-  opacity: 0.06;
+  opacity: 0.15;
 }
 
 .workshop-bridge-inner {
