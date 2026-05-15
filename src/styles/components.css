@@ -870,10 +870,14 @@
   border-bottom: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth) 25%, var(--neutral-200));
 }
 
+/* Dark wants a richer base than the cool neutral track — mauve on
+   secondary-950 reads as wine-on-leather rather than tinted-slate.
+   Slightly higher mauve ratio (30% vs light's 20%) because dark
+   grounds need more saturation to register the hue as intentional. */
 .dark .principles {
-  background: color-mix(in oklch, var(--mauve-earth) 20%, var(--neutral-800));
-  border-top-color: color-mix(in oklch, var(--mauve-earth) 25%, var(--neutral-700));
-  border-bottom-color: color-mix(in oklch, var(--mauve-earth) 25%, var(--neutral-700));
+  background: color-mix(in oklch, var(--mauve-earth) 30%, var(--secondary-950));
+  border-top-color: color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-900));
+  border-bottom-color: color-mix(in oklch, var(--mauve-earth) 35%, var(--secondary-900));
 }
 
 .principles-inner {
