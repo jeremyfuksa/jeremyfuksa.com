@@ -1881,7 +1881,9 @@
   height: var(--size-avatar);
   border-radius: var(--radius-full);
   background: var(--color-logo-bg);
+  object-fit: cover;
   flex-shrink: 0;
+  display: block;
 }
 
 .post-header-author-name {
@@ -1896,24 +1898,30 @@
 }
 
 .post-layout {
-  position: relative;
-  max-width: var(--prose-max);
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, var(--prose-max))
+    minmax(0, 1fr);
+  column-gap: clamp(24px, 4vw, 48px);
+  max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--spacing-12) var(--spacing-8) var(--spacing-20);
+  padding: 0 var(--spacing-8) var(--spacing-20);
 }
 
 .post-content {
+  grid-column: 2;
+  min-width: 0;
   max-width: var(--prose-max);
 }
 
 .post-sidebar {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: var(--sidebar-post);
-  margin-left: var(--spacing-12);
+  grid-column: 3;
+  position: sticky;
   top: calc(var(--nav-height) + var(--spacing-6));
   align-self: start;
+  width: 100%;
+  max-width: var(--sidebar-post);
 }
 
 .post-sidebar-title {
@@ -2633,6 +2641,11 @@
     grid-template-columns: 1fr;
   }
 
+  .post-content,
+  .post-sidebar {
+    grid-column: 1;
+  }
+
   .home-grid {
     gap: var(--spacing-8);
   }
@@ -2652,6 +2665,7 @@
 
   .post-sidebar {
     width: auto;
+    max-width: none;
     left: auto;
     margin-left: 0;
     padding-top: var(--spacing-6);
