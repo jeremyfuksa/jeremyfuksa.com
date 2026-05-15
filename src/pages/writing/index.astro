@@ -3,7 +3,7 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostCard from '~/components/PostCard.astro';
 import { getAllPostsSorted } from '~/lib/tags';
 
-const POSTS_PER_PAGE = 15;
+const POSTS_PER_PAGE = 5;
 const allPosts = await getAllPostsSorted();
 const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
 const posts = allPosts.slice(0, POSTS_PER_PAGE);

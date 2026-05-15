@@ -1786,6 +1786,8 @@
   font-size: var(--text-sm);
   color: var(--text-tertiary);
   font-family: var(--font-sans);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* ---------- Post Page ---------- */
