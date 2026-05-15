@@ -3795,10 +3795,11 @@
 
 /* ---------- Workshop page ---------- */
 
+/* Layout (max-width, padding) handled by the shared .writing-layout
+   pattern. .workshop-page stays as a scoping hook for descendant
+   styling. */
 .workshop-page {
-  max-width: var(--prose-max);
-  margin: 0 auto;
-  padding: var(--spacing-16) var(--spacing-8);
+  /* intentionally empty */
 }
 
 .workshop-header {
