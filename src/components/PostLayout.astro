@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import {
   SocialShare,
@@ -74,12 +74,13 @@ const shareButtons = [
   {excerpt && <p class="post-header-excerpt">{excerpt}</p>}
   {coverImage && (
     <figure class="post-header-image">
-      <Image
+      <Picture
         src={coverImage}
         alt={coverImageAlt ?? title}
         loading="eager"
         decoding="async"
         fetchpriority="high"
+        formats={['avif', 'webp']}
         widths={[640, 960, 1280, 1920]}
         sizes="(min-width: 1280px) 1280px, 100vw"
       />
