@@ -737,7 +737,7 @@
       rgba(20, 14, 8, 0.10) 75%,
       rgba(20, 14, 8, 0.00) 100%
     ),
-    url('/images/bar-bkgd.png');
+    url('/images/bar-bkgd.webp');
   background-size: auto, cover;
   background-position: center, center right;
   background-repeat: no-repeat;
