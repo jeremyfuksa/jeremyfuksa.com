@@ -3036,22 +3036,9 @@
   padding: var(--spacing-12) var(--spacing-8) var(--spacing-20);
 }
 
-.about-header {
+.about-header-wrap {
   max-width: var(--prose-max);
   margin: 0 auto var(--spacing-10);
-}
-
-.about-header h1 {
-  margin-bottom: var(--spacing-4);
-  display: inline-block;
-  padding-bottom: var(--spacing-2);
-  border-bottom: 2px solid var(--color-accent-ui);
-}
-
-.about-lede {
-  font-size: var(--text-xl);
-  line-height: var(--leading-xl);
-  color: var(--text-secondary);
 }
 
 .about-image {
@@ -3074,14 +3061,6 @@
 .about-prose {
   max-width: var(--prose-max);
   margin: 0 auto;
-}
-
-.about-meta {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wide);
-  color: var(--text-tertiary);
-  margin-top: var(--spacing-3);
 }
 
 .about-cta-section {
@@ -3889,26 +3868,8 @@ a.workshop-entry-link:hover {
   padding: var(--spacing-16) var(--spacing-8);
 }
 
-.work-with-me-header {
-  margin-bottom: var(--spacing-12);
-}
-
-.work-with-me-header h1 {
-  font-family: var(--font-heading-editorial);
-  font-variation-settings: var(--editorial-font-variation);
-  font-size: clamp(2.5rem, 3vw + 1.5rem, 4rem);
-  font-weight: 425;
-  line-height: 1;
-  color: var(--color-text-heading);
-  margin: 0 0 var(--spacing-6);
-}
-
-.work-with-me-lede {
-  font-family: var(--font-body);
-  font-size: var(--text-lg);
-  line-height: 1.6;
-  color: var(--text-primary);
-  margin: 0 0 var(--spacing-4);
+.work-with-me-page > .page-header {
+  margin-bottom: var(--spacing-10);
 }
 
 .work-with-me-section {

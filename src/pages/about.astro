@@ -11,11 +11,15 @@ const bodyHtml = `<p>In the spring of 1996 I was an Oklahoma State undergrad rea
   description="Designer and design systems leader. Built Terra at Cerner, led design systems and AI workflows at Oracle Health. Kansas City."
 >
   <article class="about-page">
-    <header class="about-header">
-      <h1>About</h1>
-      <p class="about-lede">{lede}</p>
-      <p class="about-meta">Kansas City, MO</p>
-    </header>
+    <div class="about-header-wrap">
+      <div class="page-header">
+        <div class="page-header-top">
+          <h1>About</h1>
+          <span class="page-header-count">Kansas City, MO</span>
+        </div>
+        <p class="page-header-intro">{lede}</p>
+      </div>
+    </div>
 
     <div class="post-prose about-prose" set:html={bodyHtml} />
 
