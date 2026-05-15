@@ -3064,8 +3064,8 @@
 }
 
 .about-cta-section {
-  max-width: var(--content-max);
-  margin: var(--spacing-16) calc(-1 * var(--spacing-8)) 0;
+  max-width: calc(var(--prose-max) + 2 * var(--spacing-8));
+  margin: var(--spacing-16) auto 0;
   padding: var(--spacing-12) var(--spacing-8);
   border-top: var(--border-hairline) solid var(--color-worked-with-border);
   border-bottom: var(--border-hairline) solid var(--color-worked-with-border);
