@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'case-studies'>;
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const url = `/work/${entry.id}/`;
+---
+
+<article class={`post-card ${data.coverImage ? 'post-card-has-image' : ''}`}>
+  {data.coverImage && (
+    <div class="post-card-image-col">
+      <a href={url} class="post-card-image-link">
+        <Image
+          class="post-card-image"
+          src={data.coverImage}
+          alt={data.coverImageAlt ?? ''}
+          loading="lazy"
+          widths={[320, 480, 720]}
+          sizes="(min-width: 720px) 360px, 100vw"
+        />
+      </a>
+      <div class="post-card-meta">
+        <span class="post-card-date">{data.eyebrow}</span>
+      </div>
+    </div>
+  )}
+  <div class="post-card-content">
+    {!data.coverImage && (
+      <div class="post-card-meta">
+        <span class="post-card-date">{data.eyebrow}</span>
+      </div>
+    )}
+    <a href={url}>
+      <h3 class="post-card-title">{data.title}</h3>
+    </a>
+    {data.excerpt && <p class="post-card-excerpt">{data.excerpt}</p>}
+    <div class="post-card-footer">
+      <a href={url} class="post-card-read-link">Read the case study <span>&rarr;</span></a>
+    </div>
+  </div>
+</article>

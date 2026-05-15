@@ -1759,6 +1759,15 @@
   border-bottom: 2px solid var(--color-accent-ui);
 }
 
+.page-header-intro {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 60ch;
+  margin: var(--spacing-4) 0 0;
+}
+
 .page-header-count {
   font-size: var(--text-sm);
   color: var(--text-tertiary);
