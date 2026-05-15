@@ -3236,10 +3236,22 @@
 .casestudy-stats {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-3);
   margin: 0 0 var(--spacing-10);
   padding: 0;
+}
+
+@media (max-width: 600px) {
+  .casestudy-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .casestudy-stats {
+    grid-template-columns: 1fr;
+  }
 }
 
 .casestudy-stat {
