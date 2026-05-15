@@ -171,15 +171,36 @@
 /* ---------- Footer ---------- */
 
 .site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--color-footer-bg);
   border-top: var(--border-hairline) solid var(--color-footer-border);
   padding: var(--spacing-8) var(--spacing-8);
+}
+
+/* Topographic texture — sits behind the footer content as a material layer,
+   not a graphic. Low opacity per the visual concept brief's "nearly invisible —
+   present as texture, not as a visual element." */
+.site-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/topo-bkgd.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.10;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Footer is dark-surfaced in both modes — no dark-specific overrides needed;
    token values resolve correctly per mode via tokens.css cascade. */
 
 .footer-inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0;
