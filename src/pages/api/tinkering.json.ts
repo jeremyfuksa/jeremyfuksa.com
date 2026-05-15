@@ -34,7 +34,7 @@ interface NowPlayingSignal {
 }
 
 async function fetchGithub(): Promise<GithubSignal> {
-  const token = import.meta.env.GITHUB_TOKEN;
+  const token = process.env.GITHUB_TOKEN;
   if (!token) throw new Error('GITHUB_TOKEN not set');
 
   const url =
@@ -77,8 +77,8 @@ async function fetchGithub(): Promise<GithubSignal> {
 }
 
 async function fetchHaState(entityId: string) {
-  const base = import.meta.env.HA_URL;
-  const token = import.meta.env.HA_TOKEN;
+  const base = process.env.HA_URL;
+  const token = process.env.HA_TOKEN;
   if (!base || !token) throw new Error('HA_URL / HA_TOKEN not set');
 
   const res = await fetch(`${base}/api/states/${entityId}`, {
@@ -97,7 +97,7 @@ async function fetchHaState(entityId: string) {
 }
 
 async function fetchTemperature(): Promise<TemperatureSignal> {
-  const entity = import.meta.env.HA_TEMP_ENTITY;
+  const entity = process.env.HA_TEMP_ENTITY;
   if (!entity) throw new Error('HA_TEMP_ENTITY not set');
 
   const data = await fetchHaState(entity);
@@ -117,7 +117,7 @@ async function fetchTemperature(): Promise<TemperatureSignal> {
 }
 
 async function fetchNowPlaying(): Promise<NowPlayingSignal> {
-  const entity = import.meta.env.HA_MEDIA_ENTITY;
+  const entity = process.env.HA_MEDIA_ENTITY;
   if (!entity) throw new Error('HA_MEDIA_ENTITY not set');
 
   const data = await fetchHaState(entity);

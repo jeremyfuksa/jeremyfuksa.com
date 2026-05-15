@@ -1,0 +1,23 @@
+[Unit]
+Description=jeremyfuksa.com Astro SSR (Node standalone)
+After=network.target
+
+[Service]
+Type=simple
+User=admin
+Group=admin
+WorkingDirectory=/home/admin/jeremyfuksa.com
+EnvironmentFile=/etc/jeremyfuksa-ssr.env
+Environment=NODE_ENV=production
+Environment=HOST=0.0.0.0
+Environment=PORT=4321
+ExecStart=/home/admin/.nvm/versions/node/v24.12.0/bin/node /home/admin/jeremyfuksa.com/dist/server/entry.mjs
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+
+[Install]
+WantedBy=multi-user.target

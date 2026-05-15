@@ -1,0 +1,7 @@
+# Install as /etc/sudoers.d/jeremyfuksa-ssr-restart  (root:root mode 0440)
+#
+# Allows the admin user to restart only the Astro SSR unit without a
+# password. Used by /home/admin/rebuild-jeremyfuksa.sh after each build.
+# Validate after installing with: visudo -c -f /etc/sudoers.d/jeremyfuksa-ssr-restart
+
+admin ALL=(root) NOPASSWD: /bin/systemctl restart jeremyfuksa-ssr, /bin/systemctl reload-or-restart jeremyfuksa-ssr

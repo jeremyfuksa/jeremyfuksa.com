@@ -45,13 +45,15 @@ all-null and the strip renders fallback copy.
 Production is a DigitalOcean droplet at `161.35.226.162`. Traefik (TLS)
 routes `jeremyfuksa.com` to an `astro-web` nginx container that serves
 prerendered assets from `/home/admin/jeremyfuksa.com/dist/client`.
-Requests to `/api/*` are reverse-proxied to a PM2-managed Node process
-on the host that runs the `@astrojs/node` standalone server
-(`dist/server/entry.mjs`, listening on `localhost:4321`).
+Requests to `/api/*` are reverse-proxied to a systemd-managed Node
+process on the host (`jeremyfuksa-ssr.service`) that runs the
+`@astrojs/node` standalone server (`dist/server/entry.mjs`, listening
+on `0.0.0.0:4321` — UFW restricts external access).
 
 A systemd path unit on the host (`rebuild-jeremyfuksa.path`) watches
 `~/.rebuild-trigger/rebuild` and runs `~/rebuild-jeremyfuksa.sh`:
-`git pull` → `pnpm install` → `pnpm build` → `pm2 reload jeremyfuksa`.
+`git pull` → `pnpm install` → `pnpm build` →
+`sudo -n systemctl restart jeremyfuksa-ssr`.
 
 Deploy flow:
 
@@ -61,14 +63,16 @@ ssh admin@161.35.226.162 'touch /home/admin/.rebuild-trigger/rebuild'
 ```
 
 Build takes ~20–30s on the droplet. nginx serves new static files on
-the next request; `pm2 reload` swaps the SSR process gracefully.
+the next request; the SSR restart drops in-flight requests for ~300ms
+(only the homepage tinkering strip uses it).
 
-First-time PM2 bootstrap, env-var setup, nginx-to-SSR wiring, and the
-docker-compose changes needed for `host.docker.internal` resolution are
-documented in [`deploy/pm2/README.md`](deploy/pm2/README.md).
-Tinkering-strip credentials live in `/home/admin/ecosystem.config.js` on
-the droplet (out of the repo); the template is at
-[`deploy/pm2/ecosystem.config.example.js`](deploy/pm2/ecosystem.config.example.js).
+First-time systemd unit setup, env-var setup, nginx-to-SSR wiring, the
+docker-compose `host.docker.internal` pinning, and the UFW rule for
+the docker proxy network are all documented in
+[`deploy/systemd/README.md`](deploy/systemd/README.md).
+Tinkering-strip credentials live in `/etc/jeremyfuksa-ssr.env` on the
+droplet (root:root mode 0600, out of the repo); the template is at
+[`deploy/systemd/jeremyfuksa-ssr.env.example`](deploy/systemd/jeremyfuksa-ssr.env.example).
 
 ## Architecture
 
