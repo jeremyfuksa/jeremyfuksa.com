@@ -858,14 +858,22 @@
 
 /* ---------- Principles section ---------- */
 
-/* Mauve-earth surface for the section's filter job. Pure token —
-   Campfire's .dark cascade swaps mauve-earth between #c898ad (light)
-   and #9b6b7f (dark) automatically. */
+/* Mauve-earth tint at airy-ladder luminance — the hue carries the
+   filter signal, the brightness sits where the other section surfaces
+   do (neutral-100 in light, neutral-800 in dark). 20% mauve mixed
+   into the neutral step keeps the section legible as its own room
+   without stepping out of the page rhythm. */
 .principles {
   padding: var(--spacing-16) var(--spacing-8);
-  background: var(--mauve-earth);
-  border-top: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth), black 15%);
-  border-bottom: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth), black 15%);
+  background: color-mix(in oklch, var(--mauve-earth) 20%, var(--neutral-100));
+  border-top: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth) 25%, var(--neutral-200));
+  border-bottom: var(--border-hairline) solid color-mix(in oklch, var(--mauve-earth) 25%, var(--neutral-200));
+}
+
+.dark .principles {
+  background: color-mix(in oklch, var(--mauve-earth) 20%, var(--neutral-800));
+  border-top-color: color-mix(in oklch, var(--mauve-earth) 25%, var(--neutral-700));
+  border-bottom-color: color-mix(in oklch, var(--mauve-earth) 25%, var(--neutral-700));
 }
 
 .principles-inner {
