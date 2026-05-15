@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import CaseStudyCard from '~/components/CaseStudyCard.astro';
 
 const studies = (await getCollection('case-studies')).sort(
   (a, b) => a.data.order - b.data.order,
@@ -8,25 +9,22 @@ const studies = (await getCollection('case-studies')).sort(
 ---
 
 <BaseLayout title="Work — Jeremy Fuksa" description="Selected case studies in design systems, AI design pipelines, and regulated-domain UX.">
-  <div class="work-page">
-    <header class="work-header">
-      <h1>Work</h1>
-      <p class="work-intro">Selected case studies — design systems at scale, AI design pipeline infrastructure, and UX work in regulated domains.</p>
-    </header>
-
-    <div class="work-list">
-      {studies.map((s) => (
-        <a href={`/work/${s.id}/`} class="work-row">
-          <div class="work-row-meta">{s.data.eyebrow}</div>
-          <div class="work-row-title">{s.data.title}</div>
-          <div class="work-row-excerpt">{s.data.excerpt}</div>
-        </a>
-      ))}
+  <div class="writing-layout writing-layout-single">
+    <div class="page-header">
+      <div class="page-header-top">
+        <h1>Work</h1>
+        <span class="page-header-count">{studies.length} case studies</span>
+      </div>
+      <p class="page-header-intro">Over the last decade, my proof of work stopped being screenshots and turned into leadership thinking and strategic UX.</p>
     </div>
+
+    <main>
+      {studies.map((s) => <CaseStudyCard entry={s} />)}
+    </main>
 
     <section id="work-with-me" class="work-cta-section">
       <h2 class="work-cta-title">Work with me</h2>
-      <p class="work-cta-body">Open to full-time roles from Senior IC through Director, plus contract, fractional, and workshop engagements. Kansas City, remote-friendly. Roles, contracts, and what fits is on the work-with-me page.</p>
+      <p class="work-cta-body">Open to full-time roles from Senior IC through Director, plus contract and fractional engagements. Kansas City, remote-friendly. Roles, contracts, and what fits is on the work-with-me page.</p>
       <div class="work-cta-actions">
         <a href="/work-with-me/" class="hero-cta">Work with me</a>
         <a href="mailto:hello@jeremyfuksa.com" class="hero-cta-secondary">Email me &rarr;</a>

@@ -6,6 +6,7 @@ interface WorkshopEntry {
   status: string;
   body: string;
   note?: string;
+  link?: string;
 }
 
 const rightNow: WorkshopEntry[] = [
@@ -28,6 +29,7 @@ const rightNow: WorkshopEntry[] = [
     name: 'The algorithm experiment',
     status: 'Ongoing',
     body: 'I stopped touching the Apple Music shuffle controls. No skips, no stars, no explicit thumbs-down. Three months in. I wanted to know what it would surface if I got out of its way. The answer so far is: things I forgot I loved and a lot of 90s country.',
+    link: '/writing/the-algorithm-and-i-were-in-a-rut/',
   },
   {
     name: 'This site',
@@ -76,12 +78,14 @@ const everythingElse: WorkshopEntry[] = [
   title="Workshop — Jeremy Fuksa"
   description="What I’m working on right now, and the projects that accumulated along the way. Hardware, radio, music, software side projects, writing experiments, archived obsessions."
 >
-  <article class="workshop-page">
-    <header class="workshop-header">
-      <h1>Workshop</h1>
-      <p class="workshop-updated">Updated May 2026 &middot; Kansas City</p>
-      <p class="workshop-lede">Workshop replaced the Now page. The Now page was the right idea but too narrow — it only captured the present tense. Workshop holds the whole arc. What’s active, what finished, what got abandoned and why.</p>
-    </header>
+  <article class="workshop-page writing-layout writing-layout-single">
+    <div class="page-header">
+      <div class="page-header-top">
+        <h1>Workshop</h1>
+        <span class="page-header-count">Updated May 2026 &middot; Kansas City</span>
+      </div>
+      <p class="page-header-intro">Workshop replaced the Now page. The Now page was the right idea but too narrow — it only captured the present tense. Workshop holds the whole arc. What’s active, what finished, what got abandoned and why.</p>
+    </div>
 
     <section class="workshop-section" aria-labelledby="right-now-heading">
       <h2 id="right-now-heading" class="workshop-section-title">Right now</h2>
@@ -90,7 +94,9 @@ const everythingElse: WorkshopEntry[] = [
         {rightNow.map((entry) => (
           <li class="workshop-entry">
             <div class="workshop-entry-header">
-              <span class="workshop-entry-name">{entry.name}</span>
+              {entry.link
+                ? <a href={entry.link} class="workshop-entry-name workshop-entry-link">{entry.name}</a>
+                : <span class="workshop-entry-name">{entry.name}</span>}
               <span class="workshop-entry-sep" aria-hidden="true">&mdash;</span>
               <span class="workshop-entry-status">{entry.status}</span>
             </div>
@@ -108,7 +114,9 @@ const everythingElse: WorkshopEntry[] = [
         {everythingElse.map((entry) => (
           <li class="workshop-entry">
             <div class="workshop-entry-header">
-              <span class="workshop-entry-name">{entry.name}</span>
+              {entry.link
+                ? <a href={entry.link} class="workshop-entry-name workshop-entry-link">{entry.name}</a>
+                : <span class="workshop-entry-name">{entry.name}</span>}
               <span class="workshop-entry-sep" aria-hidden="true">&mdash;</span>
               <span class="workshop-entry-status">{entry.status}</span>
             </div>

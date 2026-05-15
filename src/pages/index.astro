@@ -71,12 +71,8 @@ const workshopChips = [
     </div>
   </section>
 
-  <section class="principles" aria-labelledby="principles-heading">
+  <section class="principles" aria-label="Principles">
     <div class="principles-inner">
-      <div class="principles-header">
-        <span class="section-eyebrow" id="principles-heading">01 / Principles</span>
-        <span class="section-aside">Five, numbered, opinionated</span>
-      </div>
       <div class="principles-grid">
         <ol class="principles-list">
           {principles.map((p) => (
@@ -93,11 +89,8 @@ const workshopChips = [
     </div>
   </section>
 
-  <section class="featured-work" aria-labelledby="featured-work-heading">
+  <section class="featured-work" aria-label="Featured work">
     <div class="featured-work-inner">
-      <div class="section-header">
-        <span class="section-eyebrow" id="featured-work-heading">02 / Featured work</span>
-      </div>
       <div class="featured-work-grid">
         <a href="/work/domain-foundation/" class="featured-work-card">
           <span class="featured-work-label">Methodology</span>
@@ -124,11 +117,9 @@ const workshopChips = [
     </div>
   </section>
 
-  <section class="home-writing-section" aria-labelledby="writing-heading">
+  <section class="home-writing-section" aria-labelledby="home-writing-heading">
     <div class="home-writing-inner">
-      <div class="section-header">
-        <span class="section-eyebrow" id="writing-heading">03 / Writing</span>
-      </div>
+      <h2 class="home-writing-heading" id="home-writing-heading">A journal of unbridled creativity</h2>
       <div class="home-writing-grid">
         <main>
           {heroPost && <PostCardFeatured entry={heroPost} />}
