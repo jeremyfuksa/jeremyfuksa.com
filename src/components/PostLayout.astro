@@ -10,7 +10,6 @@ import {
   ThreadsShareButton,
   FacebookShareButton,
 } from 'astro-social-share';
-import TagPill from './TagPill.astro';
 import { isoDate, shortDate, readingTime } from '~/lib/format';
 
 interface Props {
@@ -18,7 +17,6 @@ interface Props {
   excerpt?: string;
   publishedAt: Date;
   updatedAt?: Date;
-  tags: string[];
   author: string;
   readingMinutes?: number;
   coverImage?: ImageMetadata;
@@ -31,7 +29,6 @@ const {
   title,
   excerpt,
   publishedAt,
-  tags,
   author,
   readingMinutes,
   coverImage,
@@ -61,7 +58,6 @@ const shareButtons = [
   <a href="/writing/" class="post-header-back">&larr; All writing</a>
   <h1 class="post-header-title">{title}</h1>
   <div class="post-header-meta">
-    <TagPill tags={tags} />
     <span class="post-card-date">
       <time datetime={isoDate(publishedAt)}>{shortDate(publishedAt)}</time>
     </span>

@@ -5,12 +5,13 @@ interface Props {
 const { currentPath } = Astro.props;
 
 const navItems = [
-  { url: '/writing/', label: 'Writing' },
   { url: '/work/', label: 'Work' },
-  { url: '/now/', label: 'Now' },
+  { url: '/writing/', label: 'Writing' },
+  { url: '/workshop/', label: 'Workshop' },
   { url: '/about/', label: 'About' },
-  { url: '/work-with-me/', label: 'Work with me' },
 ];
+
+const ctaItem = { url: '/work-with-me/', label: 'Work with me' };
 
 function isActive(itemUrl: string): boolean {
   if (itemUrl === '/') return currentPath === '/';
@@ -36,6 +37,14 @@ function isActive(itemUrl: string): boolean {
             </a>
           </li>
         ))}
+        <li>
+          <a
+            href={ctaItem.url}
+            class={`nav-cta ${isActive(ctaItem.url) ? 'nav-current' : ''}`}
+          >
+            {ctaItem.label}
+          </a>
+        </li>
         <li>
           <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
             <svg class="theme-toggle-icon theme-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">

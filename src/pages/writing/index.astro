@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostCard from '~/components/PostCard.astro';
-import { getAllPostsSorted, getAllTagsWithCounts } from '~/lib/tags';
+import { getAllPostsSorted } from '~/lib/tags';
 
 const POSTS_PER_PAGE = 15;
 const allPosts = await getAllPostsSorted();
-const allTags = await getAllTagsWithCounts();
 const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
 const posts = allPosts.slice(0, POSTS_PER_PAGE);
 ---
@@ -17,13 +16,6 @@ const posts = allPosts.slice(0, POSTS_PER_PAGE);
         <h1>Writing</h1>
       </div>
       <span class="page-header-count">{allPosts.length} posts</span>
-    </div>
-
-    <div class="filter-bar">
-      <a href="/writing/" class="filter-chip active">All</a>
-      {allTags.map((tag) => (
-        <a href={`/tag/${tag.slug}/`} class="filter-chip">{tag.name}</a>
-      ))}
     </div>
 
     <main>

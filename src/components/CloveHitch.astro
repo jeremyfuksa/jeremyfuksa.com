@@ -1,0 +1,40 @@
+---
+/*
+  Clove hitch line drawing. Proof for Principle 05 in the Principles section.
+  Stroke takes currentColor so the surrounding text color drives it.
+*/
+---
+
+<figure class="clove-hitch">
+  <span class="clove-hitch-label">A working illustration</span>
+  <svg
+    class="clove-hitch-svg"
+    viewBox="0 0 220 220"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    role="img"
+    aria-label="A line drawing of a clove hitch tied around a vertical post."
+  >
+    <!-- The post the knot grips -->
+    <line x1="110" y1="14" x2="110" y2="206" stroke-width="6" />
+
+    <!-- First wrap: enters bottom-left, goes up across the post, exits behind upper-right -->
+    <path d="M 24 168 C 60 156, 96 132, 124 108 S 184 76, 196 60" />
+
+    <!-- Hidden segment behind the post (lighter / dashed effect via short stroke break) -->
+    <path d="M 124 108 L 110 96" stroke-dasharray="3 5" opacity="0.55" />
+
+    <!-- Second wrap: enters upper-left, crosses down across the first wrap, exits lower-right -->
+    <path d="M 24 96 C 56 110, 92 134, 118 154 S 182 184, 196 192" />
+
+    <!-- Cross-over highlight where the second wrap passes over the first -->
+    <circle cx="120" cy="132" r="3.5" fill="currentColor" stroke="none" opacity="0.85" />
+  </svg>
+  <figcaption class="clove-hitch-caption">
+    <p>“The clove hitch is an incredibly simple knot. Once under tension, it holds until the rope breaks.”</p>
+    <span class="clove-hitch-attribution">Fossil &middot; Orange Flame, 2017</span>
+  </figcaption>
+</figure>

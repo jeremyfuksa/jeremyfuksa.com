@@ -2,6 +2,8 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostCardFeatured from '~/components/PostCardFeatured.astro';
 import SidebarPostLink from '~/components/SidebarPostLink.astro';
+import TinkeringStrip from '~/components/TinkeringStrip.astro';
+import CloveHitch from '~/components/CloveHitch.astro';
 import { getAllPostsSorted } from '~/lib/tags';
 
 const allPosts = await getAllPostsSorted();
@@ -10,23 +12,92 @@ const heroPost = featuredPosts[0] ?? allPosts[0];
 const sidebarPosts = featuredPosts.length > 0
   ? featuredPosts.slice(1, 6)
   : allPosts.slice(1, 6);
+
+const principles = [
+  {
+    n: '01',
+    body:
+      'Designs should be simple. Interactions within design should be ridiculously simple. A decade of design systems taught me that complexity is almost always a sign that someone upstream didn’t make a decision.',
+  },
+  {
+    n: '02',
+    body:
+      'Figma is the right place to start. It’s almost never the long-term source of truth. The moment you’re building a real design system, the npm package starts pulling ahead — and knowing when to go back to Figma to reconcile, versus when to keep building forward, is the judgment most teams never develop.',
+  },
+  {
+    n: '03',
+    body:
+      'AI in design is a knowledge problem before it’s a prompt problem. Most teams skip straight to prompting, then wonder why the output sounds like no one who works there.',
+  },
+  {
+    n: '04',
+    body:
+      'The napkin sketch is the spec. Figma is a translation, code is a translation, and the meeting where someone asks “but what did you mean by this?” is what happens when the intent didn’t survive the trip.',
+  },
+  {
+    n: '05',
+    body:
+      'Simple, yet strong. Knots and components work the same way — they hold until the requirements change, and then you see what you actually built.',
+  },
+];
+
+const workshopChips = [
+  'Bear Paw',
+  'Kerchunk',
+  'Meshtastic KC',
+  'SDR & antennas',
+  'Music experiments',
+];
 ---
 
 <BaseLayout
   title="Jeremy Fuksa — The Cocktail Napkin"
-  description="Design systems, UX strategy, and AI design pipeline infrastructure. Senior IC through Director. Kansas City, remote-friendly."
+  description="Most design decisions get made on a cocktail napkin before they ever reach Figma. Jeremy Fuksa — design systems, AI design pipelines, and the institutional knowledge that has to feed them."
 >
-  <div class="home-bg">
+  <TinkeringStrip />
 
   <section class="hero">
     <div class="hero-inner">
-      <h1 class="hero-name">Jeremy Fuksa</h1>
-      <p class="hero-positioning">Senior IC through Director. Design systems, UX strategy, and the AI design pipeline work that ties them together &mdash; RAG, vector databases, MCP, and the institutional knowledge that has to feed them. Built at Cerner and Oracle Health. Open to teams anywhere from Kansas City.</p>
+      <h1 class="hero-h1">Most design decisions get made on a cocktail napkin before they ever reach Figma.</h1>
+      <p class="hero-thesis">The sketch is where design intent lives before the meeting, the Jira ticket, and the AI pipeline get to it.</p>
+      <p class="hero-body">Thirty years in. Started with 3.5-inch floppies, currently arguing with a language model about whether it understood what I meant. The work in between is either on this site or in the Workshop next door.</p>
+      <p class="hero-cta-row">
+        <a href="/work/" class="hero-cta">See the work</a>
+        <span class="hero-cta-sep" aria-hidden="true">&middot;</span>
+        <span class="hero-cta-or">or</span>
+        <span class="hero-cta-sep" aria-hidden="true">&middot;</span>
+        <a href="/writing/" class="hero-cta">Read the writing</a>
+      </p>
     </div>
   </section>
 
-  <section class="featured-work">
+  <section class="principles" aria-labelledby="principles-heading">
+    <div class="principles-inner">
+      <div class="principles-header">
+        <span class="section-eyebrow" id="principles-heading">01 / Principles</span>
+        <span class="section-aside">Five, numbered, opinionated</span>
+      </div>
+      <div class="principles-grid">
+        <ol class="principles-list">
+          {principles.map((p) => (
+            <li class="principle">
+              <span class="principle-number">{p.n}</span>
+              <p class="principle-body">{p.body}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="principles-figure">
+          <CloveHitch />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-work" aria-labelledby="featured-work-heading">
     <div class="featured-work-inner">
+      <div class="section-header">
+        <span class="section-eyebrow" id="featured-work-heading">02 / Featured work</span>
+      </div>
       <div class="featured-work-grid">
         <a href="/work/domain-foundation/" class="featured-work-card">
           <span class="featured-work-label">Methodology</span>
@@ -53,46 +124,41 @@ const sidebarPosts = featuredPosts.length > 0
     </div>
   </section>
 
-  <section class="testimonial">
-    <div class="testimonial-inner">
-      <span class="testimonial-label">What people say</span>
-      <div class="testimonial-grid">
-        <figure class="testimonial-item">
-          <blockquote class="testimonial-quote">
-            <p>Jeremy was the rare soul you meet in business. Very few designers I have encountered (and I have worked with many) have his technical acumen. During this agentic era, he took on a difficult initiative to prove a hypothesis with design and AI. He effectively pivoted when technology opportunities arose that made more business sense. He led a team to drive results and inspired those around him. I would recommend him to any situation where advanced technology and design converge.</p>
-          </blockquote>
-          <figcaption class="testimonial-cite">
-            <span class="testimonial-cite-name">Douglas Liles</span>
-            <span class="testimonial-cite-title">Senior Principal Product Manager, Oracle Health</span>
-          </figcaption>
-        </figure>
-        <figure class="testimonial-item">
-          <blockquote class="testimonial-quote">
-            <p>I&rsquo;ve had the privilege of collaborating with Jeremy over seven years, watching him grow into an exceptionally thoughtful design systems leader. At Oracle Health, he built and managed teams that didn&rsquo;t just deliver&mdash;they thrived. His deep expertise spans design systems, web applications, and most recently, how AI can meaningfully enhance our design processes. What sets Jeremy apart is his genuine collaborative spirit paired with real technical depth. He&rsquo;s the kind of leader who makes those around him better.</p>
-          </blockquote>
-          <figcaption class="testimonial-cite">
-            <span class="testimonial-cite-name">Micah Sonderman, UXC</span>
-            <span class="testimonial-cite-title">Healthcare UX Leader, Oracle Health</span>
-          </figcaption>
-        </figure>
+  <section class="home-writing-section" aria-labelledby="writing-heading">
+    <div class="home-writing-inner">
+      <div class="section-header">
+        <span class="section-eyebrow" id="writing-heading">03 / Writing</span>
+      </div>
+      <div class="home-writing-grid">
+        <main>
+          {heroPost && <PostCardFeatured entry={heroPost} />}
+        </main>
+        <aside class="sidebar">
+          <span class="section-title">Previous</span>
+          <nav class="sidebar-posts">
+            {sidebarPosts.map((entry) => <SidebarPostLink entry={entry} />)}
+            <a href="/writing/" class="sidebar-posts-all">All posts &rarr;</a>
+          </nav>
+        </aside>
       </div>
     </div>
   </section>
 
-  <div class="home-writing-grid">
-    <main>
-      <span class="section-title">Latest</span>
-      {heroPost && <PostCardFeatured entry={heroPost} />}
-    </main>
-
-    <aside class="sidebar">
-      <span class="section-title">Previous Writing</span>
-      <nav class="sidebar-posts">
-        {sidebarPosts.map((entry) => <SidebarPostLink entry={entry} />)}
-        <a href="/writing/" class="sidebar-posts-all">All posts &rarr;</a>
-      </nav>
-    </aside>
-  </div>
-
-  </div>
+  <section class="workshop-bridge" aria-labelledby="workshop-bridge-heading">
+    <div class="workshop-bridge-inner">
+      <span class="workshop-bridge-eyebrow">A room next to this one</span>
+      <h2 class="workshop-bridge-headline" id="workshop-bridge-heading">The Workshop.</h2>
+      <div class="workshop-bridge-body">
+        <p>Bear Paw is a control system for Uniden scanners. Kerchunk is a Pi Zero 2W and a stick SDR I&rsquo;m trying to get into something pocket-sized. I&rsquo;ve been running a Meshtastic mesh network across Kansas City. I spent three months trying to break my Apple Music algorithm on purpose.</p>
+        <p>The Workshop is where I keep all of this. Hiring managers can skip it. Designers who keep reading will probably stay.</p>
+      </div>
+      <ul class="workshop-bridge-chips" aria-label="Workshop topics">
+        {workshopChips.map((chip) => (
+          <li><a href="/workshop/" class="workshop-chip">{chip}</a></li>
+        ))}
+        <li><a href="/workshop/" class="workshop-chip workshop-chip-more">+ more</a></li>
+      </ul>
+      <a href="/workshop/" class="workshop-bridge-cta">Enter the Workshop &rarr;</a>
+    </div>
+  </section>
 </BaseLayout>

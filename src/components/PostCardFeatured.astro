@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import type { PostEntry } from '~/lib/tags';
 import { isoDate, shortDate, readingTime } from '~/lib/format';
-import TagPill from './TagPill.astro';
 
 interface Props {
   entry: PostEntry;
@@ -29,7 +28,6 @@ const readtime = readingTime(data.readingTime);
     </a>
   )}
   <div class="post-card-meta">
-    <TagPill tags={data.tags} />
     <span class="post-card-date">
       <time datetime={isoDate(data.publishedAt)}>{shortDate(data.publishedAt)}</time>
     </span>

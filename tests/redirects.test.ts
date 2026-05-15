@@ -10,6 +10,10 @@ describe('redirects', () => {
     expect(redirects['/rss/']).toBe('/rss.xml');
   });
 
+  it('redirects retired /now/ to /workshop/', () => {
+    expect(redirects['/now/']).toBe('/workshop/');
+  });
+
   it('all redirect targets are absolute paths starting with /', () => {
     for (const target of Object.values(redirects)) {
       expect(target).toMatch(/^\//);

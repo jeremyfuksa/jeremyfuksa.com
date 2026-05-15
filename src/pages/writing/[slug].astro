@@ -4,8 +4,7 @@ import { render } from 'astro:content';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostLayout from '~/components/PostLayout.astro';
 import PostCard from '~/components/PostCard.astro';
-import { getAllPostsSorted, tagSlug, type PostEntry } from '~/lib/tags';
-import { shortDate } from '~/lib/format';
+import { getAllPostsSorted, type PostEntry } from '~/lib/tags';
 
 export const getStaticPaths = (async () => {
   const posts = await getAllPostsSorted();
@@ -23,18 +22,6 @@ const { data } = entry;
 const { Content, remarkPluginFrontmatter } = await render(entry);
 const readingMinutes = data.readingTime ?? remarkPluginFrontmatter?.minutesRead;
 
-const primaryTag = data.tags[0];
-const primaryTagSlug = primaryTag ? tagSlug(primaryTag) : null;
-const related = primaryTagSlug
-  ? allPosts
-      .filter(
-        (p) =>
-          p.id !== entry.id &&
-          p.data.tags.some((t) => tagSlug(t) === primaryTagSlug),
-      )
-      .slice(0, 3)
-  : [];
-
 const more = allPosts.filter((p) => p.id !== entry.id).slice(0, 3);
 ---
 
@@ -47,7 +34,6 @@ const more = allPosts.filter((p) => p.id !== entry.id).slice(0, 3);
     excerpt={data.excerpt}
     publishedAt={data.publishedAt}
     updatedAt={data.updatedAt}
-    tags={data.tags}
     author={data.author}
     readingMinutes={readingMinutes}
     coverImage={data.coverImage}
@@ -56,22 +42,6 @@ const more = allPosts.filter((p) => p.id !== entry.id).slice(0, 3);
     isDraft={data.draft}
   >
     <Content />
-
-    <Fragment slot="sidebar">
-      {related.length > 0 && (
-        <>
-          <div class="post-sidebar-title">Related</div>
-          {related.map((r) => (
-            <div class="post-card">
-              <a href={`/writing/${r.id}/`}>
-                <h4 class="post-card-title">{r.data.title}</h4>
-              </a>
-              <span class="post-card-date">{shortDate(r.data.publishedAt)}</span>
-            </div>
-          ))}
-        </>
-      )}
-    </Fragment>
   </PostLayout>
 
   <footer class="post-footer">
