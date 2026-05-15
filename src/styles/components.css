@@ -967,6 +967,12 @@
   letter-spacing: var(--tracking-tight);
 }
 
+.principle-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
 .principle-body {
   font-family: var(--font-heading-editorial);
   font-variation-settings: var(--editorial-font-variation);
@@ -974,6 +980,14 @@
   line-height: 1.4;
   font-weight: 400;
   color: var(--color-text-heading);
+  margin: 0;
+}
+
+.principle-detail {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-secondary);
   margin: 0;
 }
 

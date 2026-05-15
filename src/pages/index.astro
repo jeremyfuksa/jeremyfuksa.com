@@ -15,28 +15,33 @@ const sidebarPosts = featuredPosts.length > 0
 const principles = [
   {
     n: '01',
-    body:
-      'Designs should be simple. Interactions within design should be ridiculously simple. A decade of design systems taught me that complexity is almost always a sign that someone upstream didn’t make a decision.',
+    principle: 'Designs should be simple.',
+    detail:
+      'Interactions within design should be ridiculously simple. A decade of design systems taught me that complexity is almost always a sign that someone upstream didn’t make a decision.',
   },
   {
     n: '02',
-    body:
-      'Figma is the right place to start. It’s almost never the long-term source of truth. The moment you’re building a real design system, the npm package starts pulling ahead — and knowing when to go back to Figma to reconcile, versus when to keep building forward, is the judgment most teams never develop.',
+    principle: 'Figma is the right place to start.',
+    detail:
+      'It’s almost never the long-term source of truth. The moment you’re building a real design system, the npm package starts pulling ahead — and knowing when to go back to Figma to reconcile, versus when to keep building forward, is the judgment most teams never develop.',
   },
   {
     n: '03',
-    body:
-      'AI in design is a knowledge problem before it’s a prompt problem. Most teams skip straight to prompting, then wonder why the output sounds like no one who works there.',
+    principle: 'AI in design is a knowledge problem before it’s a prompt problem.',
+    detail:
+      'Most teams skip straight to prompting, then wonder why the output sounds like no one who works there.',
   },
   {
     n: '04',
-    body:
-      'The napkin sketch is the spec. Figma is a translation, code is a translation, and the meeting where someone asks “but what did you mean by this?” is what happens when the intent didn’t survive the trip.',
+    principle: 'The napkin sketch is the spec.',
+    detail:
+      'Figma is a translation, code is a translation, and the meeting where someone asks “but what did you mean by this?” is what happens when the intent didn’t survive the trip.',
   },
   {
     n: '05',
-    body:
-      'Simple, yet strong. Knots and components work the same way — they hold until the requirements change, and then you see what you actually built.',
+    principle: 'Simple, yet strong.',
+    detail:
+      'Knots and components work the same way — they hold until the requirements change, and then you see what you actually built.',
   },
 ];
 
@@ -75,7 +80,10 @@ const workshopChips = [
           {principles.map((p) => (
             <li class="principle">
               <span class="principle-number">{p.n}</span>
-              <p class="principle-body">{p.body}</p>
+              <div class="principle-text">
+                <p class="principle-body">{p.principle}</p>
+                <p class="principle-detail">{p.detail}</p>
+              </div>
             </li>
           ))}
         </ol>
