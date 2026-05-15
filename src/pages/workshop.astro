@@ -11,36 +11,32 @@ interface WorkshopEntry {
 
 const rightNow: WorkshopEntry[] = [
   {
-    name: 'Bear Paw',
+    name: 'Bearpaw',
     status: 'Active',
-    body: 'A daily planning app I’m building for myself. Bear Paw is for the part of the day before the day starts — the fifteen minutes where you decide what actually matters. Currently in early design. The name comes from the coffee mug.',
+    body: 'I’ve got a Uniden Bearcat BCT125 radio scanner. Old Windows apps exist to program and control it. I thought I would build a platform agnostic way of doing everything the Windows apps do. I’m close to a beta, and will be sharing it when it’s ready.',
   },
   {
     name: 'Kerchunk',
     status: 'Active',
-    body: 'A mechanical keyboard builder’s companion. Helps you spec, track, and document builds without keeping seventeen browser tabs open and a spreadsheet that’s already wrong. I have too many keyboards. This felt productive.',
+    body: 'Bearpaw, but smaller. The Uniden is a pain to hook up to my car’s aux input, so I’m building a scanner that’s half the size and connects over Bluetooth.',
   },
   {
     name: 'Meshtastic KC',
-    status: 'Figuring it out',
-    body: 'Off-grid LoRa mesh radio network for the Kansas City area. I got my Technician license (KF0NUI) and immediately started thinking about infrastructure. The network doesn’t really exist yet. That’s the problem I’m solving.',
+    status: 'Dipping in and out',
+    body: 'Started playing with Meshtastic last fall. It’s a communication tool, and the silence threw me — nobody was communicating on it. So I stood up a Discord and a website for the Kansas City mesh. The Discord is almost two hundred people now.',
+    note: '<a href="https://kansascitymesh.live/">kansascitymesh.live</a> · <a href="https://discord.gg/unhg3Xfy">Discord</a>',
   },
   {
     name: 'The algorithm experiment',
     status: 'Ongoing',
-    body: 'I stopped touching the Apple Music shuffle controls. No skips, no stars, no explicit thumbs-down. Three months in. I wanted to know what it would surface if I got out of its way. The answer so far is: things I forgot I loved and a lot of 90s country.',
+    body: 'Apple Music had me in a rut. I exported my listening history and used Claude to train the algorithm out of it. West African desert blues and Brazilian music started showing up in rotation.',
     link: '/writing/the-algorithm-and-i-were-in-a-rut/',
   },
   {
-    name: 'This site',
-    status: 'Just shipped',
-    body: 'The Cocktail Napkin moved from Ghost to Astro. The tinkering strip in the nav pulls live signals — last GitHub push, the temperature in my backyard, whatever’s playing. The site is a document that updates itself.',
-  },
-  {
-    name: 'KF0NUI / radio season',
+    name: 'Amateur Radio: KF0NUI',
     status: 'Warming up',
-    body: 'Ham radio is cyclical for me. Right now I’m in the reading-and-planning phase, which means I’m watching antenna builds on YouTube and pretending I’m going to do HF this summer. I have said this before.',
-    note: 'Technician licensed, General on the study pile.',
+    body: 'Most active in the spring, sometimes the fall. The other entries on this page are what radio looks like for me — building, not hopping on the air to talk about our collectively bad backs.',
+    note: 'Technician licensed, General on the study pile. · <a href="https://www.qrz.com/db/KF0NUI">QRZ</a>',
   },
 ];
 
@@ -48,28 +44,32 @@ const everythingElse: WorkshopEntry[] = [
   {
     name: 'Campfire',
     status: 'Maintained',
-    body: 'My personal design system, published to npm. Handles tokens, typography, and a handful of utility patterns I use across projects. The spark color (one per screen, that’s the rule) is the main personality marker. It gets iterated when something breaks or something’s missing.',
+    body: 'My personal design system, on npm. Tokens, typography, a handful of utility patterns.',
+    link: 'https://www.npmjs.com/package/@jeremyfuksa/campfire',
   },
   {
     name: 'The Cocktail Napkin',
     status: 'Ongoing',
-    body: 'The writing practice. Started on Ghost, moved here. The working theory is that the most useful ideas fit on a cocktail napkin — not because they’re simple, but because you had to strip them down to find out what they actually were.',
+    body: 'The one thing I’m consistently working on. Check back on me in a few months to see how consistent I’ve been.',
+    link: '/writing/',
   },
   {
     name: 'Orange Flame Design',
     status: 'Selective',
-    body: 'The freelance practice. UX strategy, product design, the occasional weird project that doesn’t fit anywhere else. Client work goes in the case studies. Workshop is for the stuff I’m doing for myself.',
+    body: 'The freelance practice. UX strategy, product design, the occasional weird project.',
+    link: '/work-with-me/',
   },
   {
     name: 'SSTeVe',
     status: 'Shelved',
-    body: 'An SSTV (Slow Scan Television) desktop app. SSTV is how amateur radio operators send images over voice frequencies. I got deep into the DSP side of it and then got distracted by Meshtastic. The code is still there.',
+    body: 'A desktop app for sending images over ham radio. Got distracted by Meshtastic. The code is still there.',
     note: 'Shelved, not abandoned.',
   },
   {
-    name: 'Home automations / n8n',
+    name: 'Home automations / Claude Cowork',
     status: 'Always tinkering',
-    body: 'Home Assistant runs the house. n8n handles the glue logic between things that don’t natively talk to each other. I break something here roughly once a month and fix it while the coffee brews.',
+    body: 'Home Assistant runs the house. Claude Cowork glues together whatever doesn’t natively talk. I break something here roughly once a month.',
+    note: '<a href="https://www.home-assistant.io/">Home Assistant</a>',
   },
 ];
 ---
@@ -101,7 +101,7 @@ const everythingElse: WorkshopEntry[] = [
               <span class="workshop-entry-status">{entry.status}</span>
             </div>
             <p class="workshop-entry-body">{entry.body}</p>
-            {entry.note && <p class="workshop-entry-note">{entry.note}</p>}
+            {entry.note && <p class="workshop-entry-note" set:html={entry.note}></p>}
           </li>
         ))}
       </ul>
@@ -121,7 +121,7 @@ const everythingElse: WorkshopEntry[] = [
               <span class="workshop-entry-status">{entry.status}</span>
             </div>
             <p class="workshop-entry-body">{entry.body}</p>
-            {entry.note && <p class="workshop-entry-note">{entry.note}</p>}
+            {entry.note && <p class="workshop-entry-note" set:html={entry.note}></p>}
           </li>
         ))}
       </ul>
