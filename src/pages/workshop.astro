@@ -1,23 +1,126 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+
+interface WorkshopEntry {
+  name: string;
+  status: string;
+  body: string;
+  note?: string;
+}
+
+const rightNow: WorkshopEntry[] = [
+  {
+    name: 'Bear Paw',
+    status: 'Active',
+    body: 'A daily planning app I’m building for myself. Bear Paw is for the part of the day before the day starts — the fifteen minutes where you decide what actually matters. Currently in early design. The name comes from the coffee mug.',
+  },
+  {
+    name: 'Kerchunk',
+    status: 'Active',
+    body: 'A mechanical keyboard builder’s companion. Helps you spec, track, and document builds without keeping seventeen browser tabs open and a spreadsheet that’s already wrong. I have too many keyboards. This felt productive.',
+  },
+  {
+    name: 'Meshtastic KC',
+    status: 'Figuring it out',
+    body: 'Off-grid LoRa mesh radio network for the Kansas City area. I got my Technician license (KF0NUI) and immediately started thinking about infrastructure. The network doesn’t really exist yet. That’s the problem I’m solving.',
+  },
+  {
+    name: 'The algorithm experiment',
+    status: 'Ongoing',
+    body: 'I stopped touching the Apple Music shuffle controls. No skips, no stars, no explicit thumbs-down. Three months in. I wanted to know what it would surface if I got out of its way. The answer so far is: things I forgot I loved and a lot of 90s country.',
+  },
+  {
+    name: 'This site',
+    status: 'Just shipped',
+    body: 'The Cocktail Napkin moved from Ghost to Astro. The tinkering strip in the nav pulls live signals — last GitHub push, the temperature in my backyard, whatever’s playing. The site is a document that updates itself.',
+  },
+  {
+    name: 'KF0NUI / radio season',
+    status: 'Warming up',
+    body: 'Ham radio is cyclical for me. Right now I’m in the reading-and-planning phase, which means I’m watching antenna builds on YouTube and pretending I’m going to do HF this summer. I have said this before.',
+    note: 'Technician licensed, General on the study pile.',
+  },
+];
+
+const everythingElse: WorkshopEntry[] = [
+  {
+    name: 'Campfire',
+    status: 'Maintained',
+    body: 'My personal design system, published to npm. Handles tokens, typography, and a handful of utility patterns I use across projects. The spark color (one per screen, that’s the rule) is the main personality marker. It gets iterated when something breaks or something’s missing.',
+  },
+  {
+    name: 'The Cocktail Napkin',
+    status: 'Ongoing',
+    body: 'The writing practice. Started on Ghost, moved here. The working theory is that the most useful ideas fit on a cocktail napkin — not because they’re simple, but because you had to strip them down to find out what they actually were.',
+  },
+  {
+    name: 'Orange Flame Design',
+    status: 'Selective',
+    body: 'The freelance practice. UX strategy, product design, the occasional weird project that doesn’t fit anywhere else. Client work goes in the case studies. Workshop is for the stuff I’m doing for myself.',
+  },
+  {
+    name: 'SSTeVe',
+    status: 'Shelved',
+    body: 'An SSTV (Slow Scan Television) desktop app. SSTV is how amateur radio operators send images over voice frequencies. I got deep into the DSP side of it and then got distracted by Meshtastic. The code is still there.',
+    note: 'Shelved, not abandoned.',
+  },
+  {
+    name: 'Home automations / n8n',
+    status: 'Always tinkering',
+    body: 'Home Assistant runs the house. n8n handles the glue logic between things that don’t natively talk to each other. I break something here roughly once a month and fix it while the coffee brews.',
+  },
+];
 ---
 
 <BaseLayout
   title="Workshop — Jeremy Fuksa"
-  description="What I'm working on right now and the projects that accumulated along the way."
+  description="What I’m working on right now, and the projects that accumulated along the way. Hardware, radio, music, software side projects, writing experiments, archived obsessions."
 >
-  <div class="container">
-    <div class="page-header">
+  <article class="workshop-page">
+    <header class="workshop-header">
       <h1>Workshop</h1>
-      <span class="page-header-count">Updated May 2026 &middot; Kansas City</span>
-    </div>
+      <p class="workshop-updated">Updated May 2026 &middot; Kansas City</p>
+      <p class="workshop-lede">Workshop replaced the Now page. The Now page was the right idea but too narrow — it only captured the present tense. Workshop holds the whole arc. What’s active, what finished, what got abandoned and why.</p>
+    </header>
 
-    <main class="prose">
-      <p>The Workshop is being rebuilt. The full page lands with the v1 launch — hardware, radio, music, software side projects, writing experiments, archived obsessions. Each project gets a name, a status, and a sentence or two in my voice.</p>
+    <section class="workshop-section" aria-labelledby="right-now-heading">
+      <h2 id="right-now-heading" class="workshop-section-title">Right now</h2>
+      <p class="workshop-section-sub">What’s got my attention</p>
+      <ul class="workshop-entries">
+        {rightNow.map((entry) => (
+          <li class="workshop-entry">
+            <div class="workshop-entry-header">
+              <span class="workshop-entry-name">{entry.name}</span>
+              <span class="workshop-entry-sep" aria-hidden="true">&mdash;</span>
+              <span class="workshop-entry-status">{entry.status}</span>
+            </div>
+            <p class="workshop-entry-body">{entry.body}</p>
+            {entry.note && <p class="workshop-entry-note">{entry.note}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
 
-      <p>For now, the short version: I'm building <strong>Bear Paw</strong> (a daily planning app), <strong>Kerchunk</strong> (a keyboard build companion), and a Meshtastic mesh network across Kansas City. I'm running an experiment to break my Apple Music algorithm on purpose. I just shipped <strong>this site</strong>. Ham radio (KF0NUI) is warming up for storm season.</p>
+    <section class="workshop-section" aria-labelledby="everything-heading">
+      <h2 id="everything-heading" class="workshop-section-title">Everything else</h2>
+      <p class="workshop-section-sub">The accumulated work</p>
+      <ul class="workshop-entries">
+        {everythingElse.map((entry) => (
+          <li class="workshop-entry">
+            <div class="workshop-entry-header">
+              <span class="workshop-entry-name">{entry.name}</span>
+              <span class="workshop-entry-sep" aria-hidden="true">&mdash;</span>
+              <span class="workshop-entry-status">{entry.status}</span>
+            </div>
+            <p class="workshop-entry-body">{entry.body}</p>
+            {entry.note && <p class="workshop-entry-note">{entry.note}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
 
-      <p>Full Workshop coming shortly.</p>
-    </main>
-  </div>
+    <section class="workshop-footnote">
+      <p>Projects here are things I do for myself. Client work lives in <a href="/work/">the case studies</a>. Workshop is the mess before the case study exists, and also the stuff that never becomes one.</p>
+    </section>
+  </article>
 </BaseLayout>

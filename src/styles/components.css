@@ -3597,3 +3597,456 @@
   }
 }
 
+
+/* ---------- Workshop page ---------- */
+
+.workshop-page {
+  max-width: var(--prose-max);
+  margin: 0 auto;
+  padding: var(--spacing-16) var(--spacing-8);
+}
+
+.workshop-header {
+  margin-bottom: var(--spacing-12);
+}
+
+.workshop-header h1 {
+  font-family: var(--font-heading-editorial);
+  font-variation-settings: var(--editorial-font-variation);
+  font-size: clamp(2.5rem, 3vw + 1.5rem, 4rem);
+  font-weight: 425;
+  line-height: 1;
+  color: var(--color-text-heading);
+  margin: 0 0 var(--spacing-2);
+}
+
+.workshop-updated {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--spacing-6);
+}
+
+.workshop-lede {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.workshop-section {
+  margin-bottom: var(--spacing-16);
+}
+
+.workshop-section-title {
+  font-family: var(--font-heading-editorial);
+  font-variation-settings: var(--editorial-font-variation);
+  font-size: var(--text-2xl);
+  font-weight: 425;
+  color: var(--color-text-heading);
+  border-bottom: var(--border-hairline) solid var(--border-default);
+  padding-bottom: var(--spacing-2);
+  margin: 0 0 var(--spacing-2);
+}
+
+.workshop-section-sub {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--spacing-8);
+}
+
+.workshop-entries {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.workshop-entry-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.workshop-entry-name {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.workshop-entry-sep {
+  color: var(--text-tertiary);
+}
+
+.workshop-entry-status {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--color-accent-ui);
+}
+
+.workshop-entry-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.workshop-entry-note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: var(--spacing-1) 0 0;
+}
+
+.workshop-footnote {
+  padding-top: var(--spacing-8);
+  border-top: var(--border-hairline) solid var(--border-default);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.workshop-footnote a {
+  color: var(--color-accent-ui);
+}
+
+/* ---------- Work with me page ---------- */
+
+.work-with-me-page {
+  max-width: var(--prose-max);
+  margin: 0 auto;
+  padding: var(--spacing-16) var(--spacing-8);
+}
+
+.work-with-me-header {
+  margin-bottom: var(--spacing-12);
+}
+
+.work-with-me-header h1 {
+  font-family: var(--font-heading-editorial);
+  font-variation-settings: var(--editorial-font-variation);
+  font-size: clamp(2.5rem, 3vw + 1.5rem, 4rem);
+  font-weight: 425;
+  line-height: 1;
+  color: var(--color-text-heading);
+  margin: 0 0 var(--spacing-6);
+}
+
+.work-with-me-lede {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-4);
+}
+
+.work-with-me-section {
+  margin-bottom: var(--spacing-12);
+}
+
+.work-with-me-section-title {
+  font-family: var(--font-heading-editorial);
+  font-variation-settings: var(--editorial-font-variation);
+  font-size: var(--text-2xl);
+  font-weight: 425;
+  color: var(--color-text-heading);
+  border-bottom: var(--border-hairline) solid var(--border-default);
+  padding-bottom: var(--spacing-2);
+  margin: 0 0 var(--spacing-6);
+}
+
+.work-with-me-sub {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-3);
+}
+
+.work-with-me-sub-note {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--spacing-4);
+}
+
+.work-with-me-section p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-4);
+}
+
+.work-with-me-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.work-with-me-list li {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+  padding-left: var(--spacing-5);
+  position: relative;
+}
+
+.work-with-me-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent-ui);
+}
+
+.work-with-me-availability {
+  padding: var(--spacing-8);
+  background: var(--bg-subtle);
+  border-left: var(--border-blockquote) solid var(--color-accent-ui);
+}
+
+.work-with-me-email {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: var(--spacing-4) 0 0 !important;
+}
+
+.work-with-me-email a {
+  color: var(--color-accent-ui);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.work-with-me-email a:hover {
+  color: var(--color-accent-hover);
+}
+
+.work-with-me-footnote {
+  padding-top: var(--spacing-8);
+  border-top: var(--border-hairline) solid var(--border-default);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.work-with-me-footnote a {
+  color: var(--color-accent-ui);
+}
+
+/* ---------- Resume page ---------- */
+
+.resume {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--spacing-16) var(--spacing-8);
+}
+
+.resume-header {
+  margin-bottom: var(--spacing-10);
+  padding-bottom: var(--spacing-6);
+  border-bottom: var(--border-thin) solid var(--border-default);
+}
+
+.resume-header h1 {
+  font-family: var(--font-heading-editorial);
+  font-variation-settings: var(--editorial-font-variation);
+  font-size: clamp(2.25rem, 3vw + 1rem, 3rem);
+  font-weight: 425;
+  color: var(--color-text-heading);
+  margin: 0 0 var(--spacing-2);
+}
+
+.resume-title {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-4);
+}
+
+.resume-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2) var(--spacing-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.resume-contact a {
+  color: var(--color-accent-ui);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resume-section {
+  margin-bottom: var(--spacing-10);
+}
+
+.resume-section h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: var(--border-hairline) solid var(--border-default);
+  padding-bottom: var(--spacing-2);
+  margin: 0 0 var(--spacing-5);
+}
+
+.resume-bullets {
+  list-style: disc;
+  padding-left: var(--spacing-5);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.resume-bullets li {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.resume-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-6) var(--spacing-8);
+}
+
+.resume-skill-block h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2);
+}
+
+.resume-skill-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.resume-skill-block li {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.resume-experience {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  counter-reset: role;
+}
+
+.resume-role {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.resume-role-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--spacing-2);
+}
+
+.resume-role-company {
+  font-family: var(--font-heading-editorial);
+  font-variation-settings: var(--editorial-font-variation);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--color-text-heading);
+  margin: 0;
+}
+
+.resume-role-dates {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.resume-role-title {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-2);
+}
+
+.resume-side-projects {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.resume-muted {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: var(--spacing-3) 0 0;
+}
+
+.resume-muted a {
+  color: var(--color-accent-ui);
+}
+
+@media (max-width: 768px) {
+  .resume-skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workshop-page,
+  .work-with-me-page {
+    padding: var(--spacing-12) var(--spacing-6);
+  }
+}
