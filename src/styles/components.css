@@ -1183,6 +1183,9 @@
 }
 
 .featured-work-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--color-featured-card-bg);
   border: var(--border-hairline) solid var(--color-featured-card-border);
   border-radius: var(--radius-lg);
@@ -1193,6 +1196,24 @@
   text-decoration: none;
   color: inherit;
   transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Fine paper-grain texture. 256x256 tile at low opacity so the card
+   feels like card stock rather than a flat plastic coaster. */
+.featured-work-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/noise-paper.png');
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dark .featured-work-card::before {
+  opacity: 0.08;
 }
 
 .featured-work-card:hover {
