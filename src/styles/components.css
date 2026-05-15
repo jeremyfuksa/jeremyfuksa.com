@@ -719,16 +719,37 @@
 
 /* ---------- Home Page ---------- */
 
-/* Hero — typography only. No background photo, no decorative gradients.
-   The rationale calls the copy load-bearing and the design "get out of the
-   way." Generous vertical space so the H1 breathes. */
+/* Hero — bar photo with the cocktail napkin sketch on the right. Always
+   dark in both modes; the photograph defines the surface. Text sits over
+   the dark wood on the left with a left-anchored gradient overlay that
+   darkens that side further for legibility while leaving the napkin and
+   glass on the right untouched. */
 .hero {
-  padding: var(--spacing-20) var(--spacing-8) var(--spacing-16);
+  position: relative;
+  isolation: isolate;
+  padding: var(--spacing-24) var(--spacing-8);
+  background-color: #1a120b;
+  background-image:
+    linear-gradient(
+      to right,
+      rgba(20, 14, 8, 0.85) 0%,
+      rgba(20, 14, 8, 0.55) 45%,
+      rgba(20, 14, 8, 0.10) 75%,
+      rgba(20, 14, 8, 0.00) 100%
+    ),
+    url('/images/bar-bkgd.png');
+  background-size: auto, cover;
+  background-position: center, center right;
+  background-repeat: no-repeat;
+  min-height: clamp(420px, 60vh, 640px);
+  color: #f5e6d0;
 }
 
 .hero-inner {
   max-width: var(--content-max);
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-h1 {
@@ -738,27 +759,30 @@
   font-weight: 425;
   line-height: 1.04;
   letter-spacing: -0.02em;
-  color: var(--color-text-heading);
+  color: #f5e6d0;
   max-width: 22ch;
   margin: 0 0 var(--spacing-8);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 .hero-thesis {
   font-family: var(--font-body);
   font-size: clamp(1.125rem, 1vw + 0.875rem, 1.5rem);
   line-height: 1.45;
-  color: var(--text-primary);
+  color: rgba(245, 230, 208, 0.92);
   max-width: 60ch;
   margin: 0 0 var(--spacing-6);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .hero-body {
   font-family: var(--font-body);
   font-size: var(--text-lg);
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: rgba(245, 230, 208, 0.78);
   max-width: 60ch;
   margin: 0 0 var(--spacing-8);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .hero-cta-row {
@@ -772,7 +796,7 @@
 
 .hero-cta {
   font-weight: var(--font-weight-semibold);
-  color: var(--color-accent-ui);
+  color: #f5a855;
   text-decoration: underline;
   text-decoration-thickness: var(--border-thin);
   text-underline-offset: 4px;
@@ -780,15 +804,15 @@
 }
 
 .hero-cta:hover {
-  color: var(--color-accent-hover);
+  color: #fcd382;
 }
 
 .hero-cta-sep {
-  color: var(--text-tertiary);
+  color: rgba(245, 230, 208, 0.55);
 }
 
 .hero-cta-or {
-  color: var(--text-tertiary);
+  color: rgba(245, 230, 208, 0.55);
   font-style: italic;
 }
 
