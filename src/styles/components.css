@@ -191,7 +191,7 @@
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.10;
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: -1;
 }
