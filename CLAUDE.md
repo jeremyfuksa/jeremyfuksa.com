@@ -225,10 +225,12 @@ The Astro project lives at the repo root. Other top-level dirs:
   per-page rationale, voice guidelines, copy decks). Authoritative for
   intent; the code is the implementation.
 - [`deploy/nginx/`](deploy/nginx/) — production nginx config (Link
-  headers, markdown content negotiation, `/api/*` reverse proxy to PM2),
+  headers, markdown content negotiation, `/api/*` reverse proxy to the
+  host Node SSR process via `host.docker.internal:4321`),
   bind-mounted into the `astro-web` container.
-- [`deploy/pm2/`](deploy/pm2/) — PM2 ecosystem template and the deploy
-  README for the SSR process on the droplet.
+- [`deploy/systemd/`](deploy/systemd/) — `jeremyfuksa-ssr.service`
+  unit, `rebuild-jeremyfuksa.sh`, env template, and the sudoers
+  fragment that lets the rebuild script restart the SSR service.
 - [`.github/workflows/`](.github/workflows/) — CI (type-check + tests).
 - `../ghost-drafts/` (sibling of this repo, not committed) — local
   markdown drafts staged before publishing.
