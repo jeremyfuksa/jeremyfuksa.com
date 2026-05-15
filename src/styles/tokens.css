@@ -37,7 +37,6 @@
   --prose-max: 720px;
   --nav-height: 64px;
   --sidebar-home: 340px;
-  --sidebar-writing: 280px;
   --sidebar-post: 240px;
   --now-label-width: 160px;
 
@@ -80,6 +79,11 @@
   /* Blockquote rule — earned the amber accent treatment per rationale. */
   --color-blockquote-rule: var(--color-accent-ui);
   --color-toc-active: var(--color-accent-ui);
+
+  /* Spark — one instance per screen. Reserved for the case-study eyebrow
+     and the (future) tinkering strip live indicator. The intensity earns
+     its keep by being rare; do not introduce a third surface. */
+  --color-spark: #ff5a1f;
 
   /* Logo chip — nav logo SVG sits inside a tone-shifted square. */
   --color-logo-bg: var(--neutral-900);
@@ -165,6 +169,8 @@
   --color-section-underline: var(--secondary-700);
   --color-blockquote-rule: var(--color-accent-ui);
   --color-toc-active: var(--color-accent-ui);
+
+  --color-spark: #ff6b35;
 
   --color-logo-bg: var(--neutral-50);
   --color-logo-fg: var(--neutral-900);

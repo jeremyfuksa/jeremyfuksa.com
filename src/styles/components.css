@@ -3057,68 +3057,17 @@
   margin-top: var(--spacing-2);
 }
 
-.about-layout {
-  display: grid;
-  grid-template-columns: 1fr var(--sidebar-post);
-  gap: var(--spacing-16);
-  max-width: var(--content-max);
+.about-prose {
+  max-width: var(--prose-max);
   margin: 0 auto;
 }
 
-.about-prose {
-  max-width: var(--prose-max);
-}
-
-.about-sidebar {
-  position: sticky;
-  top: calc(var(--nav-height) + var(--spacing-6));
-  align-self: start;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
-}
-
-.about-sidebar-block {
-  padding-bottom: var(--spacing-4);
-  border-bottom: var(--border-hairline) solid var(--border-subtle);
-}
-
-.about-sidebar-block:last-child {
-  border-bottom: none;
-}
-
-.about-sidebar-label {
-  font-family: var(--font-sans);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--color-section-label);
-  margin-bottom: var(--spacing-2);
-}
-
-.about-sidebar-value {
-  font-size: var(--text-sm);
-  color: var(--text-primary);
-  line-height: var(--leading-sm);
-}
-
-.about-sidebar-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.about-sidebar-links a {
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  color: var(--color-accent-text);
-  font-weight: var(--font-weight-medium);
-}
-
-.about-sidebar-links a:hover {
-  color: var(--color-accent-hover);
+.about-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-tertiary);
+  margin-top: var(--spacing-3);
 }
 
 .about-cta-section {
@@ -3155,15 +3104,6 @@
   justify-content: center;
   gap: var(--spacing-6);
   align-items: center;
-}
-
-@media (max-width: 768px) {
-  .about-layout {
-    grid-template-columns: 1fr;
-  }
-  .about-sidebar {
-    position: static;
-  }
 }
 
 @media (max-width: 600px) {
@@ -3209,7 +3149,7 @@
    ============================ */
 
 .casestudy-page {
-  max-width: var(--content-max);
+  max-width: var(--prose-max);
   margin: 0 auto;
   padding: var(--spacing-12) var(--spacing-8) var(--spacing-20);
 }
@@ -3230,16 +3170,21 @@
 }
 
 .casestudy-header {
-  margin-bottom: var(--spacing-10);
+  margin-bottom: var(--spacing-8);
   padding-bottom: var(--spacing-8);
   border-bottom: var(--border-hairline) solid var(--border-default);
 }
 
+/* Eyebrow earns the one-per-screen spark. The category mark — "Methodology",
+   "Research", etc. — is the one place on the page that signals this is
+   documented work rather than a blog post. */
 .casestudy-eyebrow {
+  font-family: var(--font-sans);
   font-size: var(--text-2xs);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
-  color: var(--color-accent-text);
+  color: var(--color-spark);
   margin-bottom: var(--spacing-3);
 }
 
@@ -3256,13 +3201,77 @@
 .casestudy-tagline {
   font-size: var(--text-base);
   color: var(--text-secondary);
-  max-width: var(--prose-max);
   line-height: var(--leading-lg);
 }
 
+/* Fact strip — credit-block layout under the header. Replaces the
+   right-rail sidebar so the page reads as a single prose-width column. */
+.casestudy-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--spacing-5) var(--spacing-6);
+  margin: 0 0 var(--spacing-10);
+  padding-bottom: var(--spacing-8);
+  border-bottom: var(--border-hairline) solid var(--border-default);
+}
+
+.casestudy-fact dt {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-1);
+}
+
+.casestudy-fact dd {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: var(--leading-sm);
+  margin: 0;
+}
+
+.casestudy-stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--spacing-3);
+  margin: 0 0 var(--spacing-10);
+  padding: 0;
+}
+
+.casestudy-stat {
+  background: var(--color-tag-bg);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.casestudy-stat-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  font-variation-settings: 'WONK' 1, 'opsz' 72;
+  color: var(--color-text-heading);
+  line-height: 1;
+}
+
+.casestudy-stat-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-3xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--text-tertiary);
+  line-height: var(--leading-xs);
+}
+
 .casestudy-cover {
-  margin: var(--spacing-12) 0 var(--spacing-16);
-  max-width: var(--content-max);
+  margin: 0 0 var(--spacing-12);
 }
 
 .casestudy-cover img {
@@ -3301,15 +3310,6 @@
   border: var(--border-hairline) solid var(--border-subtle);
   border-radius: var(--radius-md);
 }
-
-.casestudy-body {
-  display: grid;
-  grid-template-columns: 1fr var(--sidebar-writing);
-  gap: var(--spacing-16);
-  align-items: start;
-}
-
-/* Prose */
 
 .casestudy-prose {
   min-width: 0;
@@ -3400,137 +3400,43 @@
   white-space: nowrap;
 }
 
-/* Sidebar */
-
-.casestudy-sidebar {
-  position: sticky;
-  top: var(--spacing-6);
-}
-
-.cs-meta-group {
-  margin-bottom: var(--spacing-5);
-}
-
-.cs-meta-label {
-  font-size: var(--text-2xs);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--text-tertiary);
-  margin-bottom: var(--spacing-1);
-}
-
-.cs-meta-value {
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  color: var(--text-primary);
-  line-height: var(--leading-sm);
-}
-
-.cs-divider {
-  border: none;
+/* References — small footer block when a case study has external links. */
+.casestudy-references {
+  margin-top: var(--spacing-12);
+  padding-top: var(--spacing-6);
   border-top: var(--border-hairline) solid var(--border-default);
-  margin: var(--spacing-5) 0;
 }
 
-.cs-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-3);
-}
-
-.cs-stat {
-  background: var(--color-tag-bg);
-  border-radius: var(--radius-sm);
-  padding: var(--spacing-3);
-}
-
-.cs-stat-value {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: 400;
-  font-variation-settings: 'WONK' 1, 'opsz' 72;
-  color: var(--color-text-heading);
-  line-height: 1;
-  margin-bottom: var(--spacing-1);
-}
-
-.cs-stat-label {
+.casestudy-references-label {
   font-family: var(--font-sans);
-  font-size: var(--text-3xs);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
   color: var(--text-tertiary);
-  line-height: var(--leading-xs);
+  margin-bottom: var(--spacing-3);
 }
 
-.cs-link {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-accent-text);
-  text-decoration: none;
-  margin-top: var(--spacing-4);
-}
-
-.cs-link:hover {
-  color: var(--color-accent-hover);
-  text-decoration: underline;
-}
-
-/* Fact list — vertical key-value pairs for Signal block */
-.cs-fact-list {
+.casestudy-references ul {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  gap: var(--spacing-2);
   margin: 0;
+  padding: 0;
 }
 
-.cs-fact-list dt {
+.casestudy-references a {
   font-family: var(--font-sans);
-  font-size: var(--text-3xs);
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-widest);
-  color: var(--text-tertiary);
-  margin-bottom: var(--spacing-1);
-}
-
-.cs-fact-list dd {
   font-size: var(--text-sm);
-  color: var(--text-primary);
-  line-height: var(--leading-sm);
-  margin: 0;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent-text);
+  text-decoration: none;
 }
 
-/* Pull quote — italic Fraunces for Signal block */
-.cs-pullquote {
-  font-family: var(--font-heading);
-  font-variation-settings: 'WONK' 1, 'opsz' 72;
-  font-style: italic;
-  font-weight: 400;
-  font-size: var(--text-base);
-  line-height: var(--leading-lg);
-  color: var(--color-text-heading);
-  border-left: var(--border-blockquote) solid var(--color-blockquote-rule);
-  padding-left: var(--spacing-4);
-  margin: 0;
-}
-
-/* Mobile */
-
-@media (max-width: 768px) {
-  .casestudy-body {
-    grid-template-columns: 1fr;
-  }
-
-  .casestudy-sidebar {
-    position: static;
-    order: -1;
-  }
+.casestudy-references a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
 }
 
 /* ==========================================================================

@@ -26,7 +26,6 @@ const caseStudies = defineCollection({
       role: z.string(),
       organization: z.string().optional(),
       timeline: z.string(),
-      pullquote: z.string().optional(),
       facts: z.array(factSchema).optional(),
       stats: z.array(statSchema).optional(),
       links: z.array(linkSchema).optional(),

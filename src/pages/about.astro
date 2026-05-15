@@ -14,33 +14,10 @@ const bodyHtml = `<p>In the spring of 1996 I was an Oklahoma State undergrad rea
     <header class="about-header">
       <h1>About</h1>
       <p class="about-lede">{lede}</p>
+      <p class="about-meta">Kansas City, MO</p>
     </header>
 
-    <div class="about-layout">
-      <div class="post-prose about-prose" set:html={bodyHtml} />
-
-      <aside class="about-sidebar">
-        <div class="about-sidebar-block">
-          <div class="about-sidebar-label">Based in</div>
-          <div class="about-sidebar-value">Kansas City, MO</div>
-        </div>
-        <div class="about-sidebar-block">
-          <div class="about-sidebar-label">Practice</div>
-          <div class="about-sidebar-value">Design systems, UX strategy, AI infrastructure for design</div>
-        </div>
-        <div class="about-sidebar-block">
-          <div class="about-sidebar-label">Elsewhere</div>
-          <ul class="about-sidebar-links">
-            <li><a href="/writing/">Writing</a></li>
-            <li><a href="/work/">Work</a></li>
-            <li><a href="/workshop/">Workshop</a></li>
-            <li><a href="/resume/">Full resume &rarr;</a></li>
-            <li><a href="https://linkedin.com/in/jeremyfuksa">LinkedIn</a></li>
-            <li><a href="https://github.com/jeremyfuksa">GitHub</a></li>
-          </ul>
-        </div>
-      </aside>
-    </div>
+    <div class="post-prose about-prose" set:html={bodyHtml} />
 
     <section id="work-with-me" class="about-cta-section">
       <h2 class="about-cta-title">Work with me</h2>
