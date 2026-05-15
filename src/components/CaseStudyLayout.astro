@@ -10,7 +10,6 @@ interface Props {
   role: string;
   organization?: string;
   timeline: string;
-  pullquote?: string;
   facts?: { label: string; value: string }[];
   stats?: { value: string; label: string }[];
   links?: { label: string; href: string }[];
@@ -26,7 +25,6 @@ const {
   role,
   organization,
   timeline,
-  pullquote,
   facts,
   stats,
   links,
@@ -36,6 +34,13 @@ const {
 } = Astro.props;
 
 const readtime = readingTime(readingMinutes);
+
+const baseFacts: { label: string; value: string }[] = [
+  { label: 'Role', value: role },
+];
+if (organization) baseFacts.push({ label: 'Organization', value: organization });
+baseFacts.push({ label: 'Timeline', value: timeline });
+const factStrip = [...baseFacts, ...(facts ?? [])];
 ---
 
 <div class="casestudy-page">
@@ -49,6 +54,26 @@ const readtime = readingTime(readingMinutes);
       {readtime && <span class="post-card-readtime">{readtime}</span>}
     </div>
   </header>
+
+  <dl class="casestudy-facts">
+    {factStrip.map((f) => (
+      <div class="casestudy-fact">
+        <dt>{f.label}</dt>
+        <dd>{f.value}</dd>
+      </div>
+    ))}
+  </dl>
+
+  {stats && stats.length > 0 && (
+    <ul class="casestudy-stats">
+      {stats.map((s) => (
+        <li class="casestudy-stat">
+          <span class="casestudy-stat-value">{s.value}</span>
+          <span class="casestudy-stat-label">{s.label}</span>
+        </li>
+      ))}
+    </ul>
+  )}
 
   {coverImage && (
     <figure class="casestudy-cover">
@@ -64,70 +89,20 @@ const readtime = readingTime(readingMinutes);
     </figure>
   )}
 
-  <div class="casestudy-body">
-    <div class="casestudy-prose post-prose">
-      <slot />
-    </div>
-
-    <aside class="casestudy-sidebar">
-      <div class="cs-meta-group">
-        <div class="cs-meta-label">Role</div>
-        <div class="cs-meta-value">{role}</div>
-      </div>
-      {organization && (
-        <div class="cs-meta-group">
-          <div class="cs-meta-label">Organization</div>
-          <div class="cs-meta-value">{organization}</div>
-        </div>
-      )}
-      <div class="cs-meta-group">
-        <div class="cs-meta-label">Timeline</div>
-        <div class="cs-meta-value">{timeline}</div>
-      </div>
-
-      {stats && stats.length > 0 && (
-        <>
-          <hr class="cs-divider" />
-          <div class="cs-stats">
-            {stats.map((s) => (
-              <div class="cs-stat">
-                <div class="cs-stat-value">{s.value}</div>
-                <div class="cs-stat-label">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {facts && facts.length > 0 && (
-        <>
-          <hr class="cs-divider" />
-          <dl class="cs-fact-list">
-            {facts.map((f) => (
-              <div>
-                <dt>{f.label}</dt>
-                <dd>{f.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </>
-      )}
-
-      {pullquote && (
-        <>
-          <hr class="cs-divider" />
-          <blockquote class="cs-pullquote">{pullquote}</blockquote>
-        </>
-      )}
-
-      {links && links.length > 0 && (
-        <>
-          <hr class="cs-divider" />
-          {links.map((l) => (
-            <a href={l.href} class="cs-link" target="_blank" rel="noopener noreferrer">{l.label}</a>
-          ))}
-        </>
-      )}
-    </aside>
+  <div class="casestudy-prose post-prose">
+    <slot />
   </div>
+
+  {links && links.length > 0 && (
+    <footer class="casestudy-references">
+      <div class="casestudy-references-label">References</div>
+      <ul>
+        {links.map((l) => (
+          <li>
+            <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </footer>
+  )}
 </div>
