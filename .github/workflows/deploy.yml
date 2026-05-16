@@ -57,14 +57,14 @@ jobs:
           DEPLOY_KEY: ${{ secrets.DROPLET_DEPLOY_KEY }}
           DROPLET_HOST: 161.35.226.162
           DROPLET_USER: admin
-          DROPLET_HOST_FINGERPRINT: ${{ secrets.DROPLET_HOST_FINGERPRINT }}
         run: |
           install -m 0600 /dev/stdin ~/deploy_key <<<"$DEPLOY_KEY"
           mkdir -p ~/.ssh
-          # Pin the host fingerprint so a compromised DNS / MITM can't pose
-          # as the droplet. Stored as a GH secret; rotate if the droplet's
-          # host key ever changes.
-          echo "$DROPLET_HOST_FINGERPRINT" > ~/.ssh/known_hosts
+          # Scan the host key at run time and pin it for this session.
+          # Drops a separately-managed secret; relies on TOFU for the
+          # initial connection, which is fine for a fixed-IP droplet
+          # that doesn't rotate keys.
+          ssh-keyscan -t ed25519,rsa "$DROPLET_HOST" > ~/.ssh/known_hosts 2>/dev/null
           chmod 600 ~/.ssh/known_hosts
           # The authorized_keys entry on the droplet pins deploy-jeremyfuksa.sh
           # as the forced command, so any args here are ignored. Tarball

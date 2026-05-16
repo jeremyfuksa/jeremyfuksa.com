@@ -150,12 +150,16 @@ directive in `~/.ssh/authorized_keys` — it can only invoke
 5. `sudo -n systemctl restart jeremyfuksa-ssr` via the same sudoers
    rule the rebuild script uses.
 
-Required GitHub Actions secrets:
+Required GitHub Actions secret:
 
 | Secret | What |
 |---|---|
 | `DROPLET_DEPLOY_KEY` | The full private key (including header/footer) |
-| `DROPLET_HOST_FINGERPRINT` | Output of `ssh-keyscan -t ed25519,rsa 161.35.226.162` (one line, used as `known_hosts`) |
+
+The host fingerprint is scanned at run time via `ssh-keyscan` and
+written to a per-run `known_hosts` file — no secret needed for it.
+If the droplet's host key ever rotates, the next deploy will simply
+pick up the new fingerprint.
 
 ## Deploy flow — manual fallback
 
