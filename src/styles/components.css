@@ -861,7 +861,7 @@
   gap: var(--spacing-4);
   padding: var(--spacing-2) var(--spacing-8);
   background: var(--bg-subtle);
-  border-bottom: var(--border-hairline) solid var(--border-default);
+  border-bottom: var(--border-hairline) solid var(--color-spark);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-secondary);
@@ -2961,16 +2961,13 @@
   border-bottom: var(--border-hairline) solid var(--border-default);
 }
 
-/* Eyebrow earns the one-per-screen spark. The category mark — "Methodology",
-   "Research", etc. — is the one place on the page that signals this is
-   documented work rather than a blog post. */
 .casestudy-eyebrow {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-widest);
-  color: var(--color-spark);
+  color: var(--color-accent-ui);
   margin-bottom: var(--spacing-3);
 }
 
