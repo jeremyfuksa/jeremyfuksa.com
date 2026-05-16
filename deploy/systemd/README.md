@@ -100,17 +100,26 @@ which is what we want.
 
 ## Static-file root + nginx config
 
-The `astro-web` container's bind mount must point at `dist/client`
-(prerendered) and `deploy/nginx` (which contains the `/api/`
-reverse-proxy block):
+The `astro-web` container binds the **parent** `dist/` (not `dist/client/`)
+into `/usr/share/nginx/html/`, and nginx is rooted one level deeper at
+`/usr/share/nginx/html/client`. Mounting the parent matters: when a
+build fully recreates `dist/client/`, the directory gets a new inode
+and a bind mount pointed at `dist/client/` directly would hold the old
+(now-deleted) inode and serve an empty root until the container was
+recreated. The parent `dist/` is stable across rebuilds — Astro only
+recreates its children. (See issue #57 for the incident this prevents.)
 
 ```yaml
 services:
   astro-web:
     volumes:
-      - ./jeremyfuksa.com/dist/client:/usr/share/nginx/html:ro
+      - ./jeremyfuksa.com/dist:/usr/share/nginx/html:ro
       - ./jeremyfuksa.com/deploy/nginx:/etc/nginx/conf.d:ro
 ```
+
+`dist/server/` ends up visible inside the container at
+`/usr/share/nginx/html/server` but is never served — nginx's `root`
+is the `client` subdirectory.
 
 ## Rebuild flow
 

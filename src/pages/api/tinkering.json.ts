@@ -34,20 +34,25 @@ interface NowPlayingSignal {
 }
 
 async function fetchGithub(): Promise<GithubSignal> {
+  // The /users/{user}/repos endpoint serves public repos without auth.
+  // If GITHUB_TOKEN is present and valid, send it for the 5000/hr rate
+  // limit; otherwise fall through to the unauthenticated 60/hr limit,
+  // which is plenty given the 60s response cache.
   const token = process.env.GITHUB_TOKEN;
-  if (!token) throw new Error('GITHUB_TOKEN not set');
 
   const url =
     'https://api.github.com/users/jeremyfuksa/repos' +
     '?sort=pushed&direction=desc&per_page=1&type=public';
 
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+    'User-Agent': 'jeremyfuksa.com tinkering strip',
+  };
+  if (token) headers.Authorization = `Bearer ${token}`;
+
   const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28',
-      'User-Agent': 'jeremyfuksa.com tinkering strip',
-    },
+    headers,
     signal: AbortSignal.timeout(4000),
   });
   if (!res.ok) throw new Error(`GitHub API ${res.status}`);

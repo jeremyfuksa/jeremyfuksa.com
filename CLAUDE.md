@@ -44,7 +44,10 @@ all-null and the strip renders fallback copy.
 
 Production is a DigitalOcean droplet at `161.35.226.162`. Traefik (TLS)
 routes `jeremyfuksa.com` to an `astro-web` nginx container that serves
-prerendered assets from `/home/admin/jeremyfuksa.com/dist/client`.
+prerendered assets from `/home/admin/jeremyfuksa.com/dist/`. The parent
+`dist/` is bind-mounted (not `dist/client/` directly) so rebuilds that
+recreate the client tree don't strand the container on a deleted inode;
+nginx is rooted at the `client` subdirectory of the mount.
 Requests to `/api/*` are reverse-proxied to a systemd-managed Node
 process on the host (`jeremyfuksa-ssr.service`) that runs the
 `@astrojs/node` standalone server (`dist/server/entry.mjs`, listening

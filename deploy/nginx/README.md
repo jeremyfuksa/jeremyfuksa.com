@@ -3,11 +3,14 @@
 `default.conf` is a drop-in replacement for the stock
 `/etc/nginx/conf.d/default.conf` inside the `astro-web` container. It:
 
-- Serves prerendered Astro output from `/usr/share/nginx/html`
-  (bind-mounted from `~/jeremyfuksa.com/dist/client` on the host).
-- Reverse-proxies `/api/*` to the PM2-managed Node SSR process running
-  on the host at `localhost:4321` (reached inside the container via
-  `host.docker.internal`).
+- Serves prerendered Astro output from `/usr/share/nginx/html/client`.
+  The host's `~/jeremyfuksa.com/dist/` is bind-mounted to
+  `/usr/share/nginx/html/`; nginx is rooted one level deeper at the
+  `client` subdirectory so the mount stays valid when Astro recreates
+  `dist/client/` during a build (see issue #57).
+- Reverse-proxies `/api/*` to the systemd-managed Node SSR process
+  running on the host at `localhost:4321` (reached inside the
+  container via `host.docker.internal`).
 - Emits homepage `Link:` response headers (RFC 8288) advertising
   sitemap, RSS, author, and the markdown companion.
 - Negotiates `Accept: text/markdown` — trailing-slash URLs rewrite to
@@ -29,22 +32,25 @@ via `/home/admin/docker-compose.yml`:
 services:
   astro-web:
     volumes:
-      - ./jeremyfuksa.com/dist/client:/usr/share/nginx/html:ro
+      - ./jeremyfuksa.com/dist:/usr/share/nginx/html:ro
       - ./jeremyfuksa.com/deploy/nginx:/etc/nginx/conf.d:ro
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.docker.internal:172.22.0.1"
 ```
 
-Two production-only changes from the old setup:
+Two production-only details:
 
-1. The static-root mount is `dist/client`, not `dist` — Astro now emits
-   prerendered HTML into `dist/client/` and the SSR server into
-   `dist/server/`.
-2. `extra_hosts` maps `host.docker.internal` to the docker host gateway
-   so nginx inside the container can reach the PM2-managed Node process
-   listening on `localhost:4321` outside it. Without this, the `/api/`
-   upstream resolves to nothing and the tinkering strip stays on its
-   fallback copy.
+1. The static-root mount is the parent `dist/` (not `dist/client/`), and
+   nginx is rooted at the `client` subdirectory. Astro fully recreates
+   `dist/client/` on builds, which would strand a direct mount on a
+   deleted inode and serve an empty root until the container was
+   recreated. The parent `dist/` is stable across rebuilds. `dist/server/`
+   ends up visible at `/usr/share/nginx/html/server` but is never served.
+2. `extra_hosts` pins `host.docker.internal` to the proxy network's
+   gateway (`172.22.0.1`) — not Docker's default `host-gateway`, which
+   resolves to the `docker0` IP. `docker0` is DOWN on this droplet,
+   so packets there go nowhere. Without this pin, the `/api/` upstream
+   times out.
 
 To apply config changes after editing `default.conf`:
 
@@ -69,5 +75,5 @@ curl -sI https://jeremyfuksa.com/about/ | grep -i content-type   # should still 
 curl -s https://jeremyfuksa.com/api/tinkering.json | jq
 ```
 
-For the PM2 + SSR-process setup that the `/api/` proxy depends on, see
-[`deploy/pm2/README.md`](../pm2/README.md).
+For the systemd + SSR-process setup that the `/api/` proxy depends on,
+see [`deploy/systemd/README.md`](../systemd/README.md).
