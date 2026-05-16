@@ -189,9 +189,10 @@ Two accent layers and one spark:
 - **`--color-accent-ui`** (amber: `#d97706` light / `#f5a855` dark) —
   the site's workhorse interactive color. Links, active nav states,
   hover states, blockquote rules. Repeats freely.
-- **`--spark`** (`#ff5a1f` light / `#ff6b35` dark) — one instance per
-  screen, reserved for the tinkering strip live indicator dot. The
-  spark earns its intensity by being rare.
+- **`--color-spark`** (`#ff5a1f` light / `#ff6b35` dark) — one instance
+  per screen, reserved for the hairline bottom border of the tinkering
+  strip. The strip is the live-data surface; the spark border is the
+  signal that it's live. The spark earns its intensity by being rare.
 
 Dark mode follows `prefers-color-scheme` by default, with a manual
 `.theme-toggle` button that overrides via `data-theme="light|dark"` and
@@ -232,7 +233,7 @@ there, which fails AA at 2.77:1.
 - Nav logo at 32px uses the simplified SVG mark, not the full wordmark.
 - Nav order is `Work · Writing · Workshop · About`, with "Work with me"
   set apart as a CTA pill.
-- One spark per screen, reserved for the tinkering strip live indicator.
+- One spark per screen, reserved for the tinkering strip's bottom border.
 - Restraint rule: every decorative element must justify itself against
   what the type is already doing. If the type does the work, the
   decoration does not belong.
