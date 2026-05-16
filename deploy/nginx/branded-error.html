@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Briefly unavailable — Jeremy Fuksa</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f5efe6;
+    --surface: #ffffff;
+    --text: #2b303b;
+    --text-muted: #5b6170;
+    --accent: #d97706;
+    --accent-hover: #b45309;
+    --hairline: rgba(43,48,59,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #2b303b;
+      --surface: #4d515c;
+      --text: #f5e6d0;
+      --text-muted: #c8ccd4;
+      --accent: #f5a855;
+      --accent-hover: #ffc77a;
+      --hairline: rgba(245,230,208,0.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .glyph {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 2rem;
+    opacity: 0.6;
+    color: var(--accent);
+  }
+  .glyph svg { width: 100%; height: 100%; display: block; fill: currentColor; }
+  h1 {
+    font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.75rem;
+    color: var(--text);
+  }
+  p {
+    margin: 0 0 1rem;
+    max-width: 36rem;
+    color: var(--text-muted);
+    font-size: 1.0625rem;
+  }
+  .meta {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hairline);
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 120ms ease;
+  }
+  a:hover { color: var(--accent-hover); }
+</style>
+</head>
+<body>
+  <div class="glyph" aria-hidden="true">
+    <svg viewBox="0 0 129 129" xmlns="http://www.w3.org/2000/svg"><g><path d="M64.079 128.587c-35.289 0-63.999-28.71-63.999-63.999 0-35.291 28.71-64.001 63.999-64.001 35.291 0 64.001 28.71 64.001 64.001 0 35.289-28.71 63.999-64.001 63.999zm0-118.139c-29.852 0-54.138 24.287-54.138 54.14 0 29.852 24.286 54.138 54.138 54.138 29.853 0 54.14-24.286 54.14-54.138 0-29.853-24.287-54.14-54.14-54.14z"/><path d="M34.281 73.523c0 15.041 14.194 28.672 29.799 28.672 15.604 0 29.799-13.631 29.799-28.672 0-11.186-6.674-18.706-12.033-24.816-5.734-6.487-9.776-12.973-8.46-17.015.658-1.786 1.222-3.196.846-3.854-1.41-2.444-6.016.752-9.87 4.324-6.392 5.922-9.777 13.818-9.871 25.099 0 .752-.564 1.504-1.316 1.598-.94.188-1.786-.564-1.786-1.504v-.658c0-1.128-.282-7.708-.564-8.366-.658-1.317-2.444-1.693-3.572-.753l-.94.753c-7.52 6.298-12.032 15.698-12.032 25.192zm17.39 10.905c0-3.384 1.41-6.392 3.572-8.648l6.769-8.085c1.034-1.222 3.008-1.222 4.042 0l6.768 8.085c2.256 2.256 3.572 5.264 3.572 8.648 0 6.768-5.546 12.314-12.314 12.314-6.769 0-12.315-5.546-12.409-12.314z"/></g></svg>
+  </div>
+  <h1>Briefly unavailable.</h1>
+  <p>The site is mid-deploy or the upstream just blinked. It should be back within a few seconds — try again.</p>
+  <p><a href="/">Reload home →</a></p>
+  <div class="meta">jeremyfuksa.com · the cocktail napkin</div>
+</body>
+</html>

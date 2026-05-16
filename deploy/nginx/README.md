@@ -14,6 +14,11 @@
   their `.md` companion when the client prefers markdown
   (e.g. `/about/` → `/about.md`, `/work/foo/` → `/work/foo.md`,
   `/` → `/index.md`). HTML stays the default for browsers.
+- Serves a branded fallback (`branded-error.html`) for 5xx responses
+  and for 404s when `dist/client/404.html` itself is missing (e.g. the
+  brief window during `pnpm build`, or a failed deploy that leaves
+  `dist/client/` empty). The fallback file is bind-mounted alongside
+  the config, so it survives any state of the static root.
 
 ## Deploy
 
