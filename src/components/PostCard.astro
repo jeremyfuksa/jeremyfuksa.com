@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import type { PostEntry } from '~/lib/tags';
 import { isoDate, shortDate, readingTime } from '~/lib/format';
 
@@ -17,11 +17,12 @@ const readtime = readingTime(data.readingTime);
   {data.coverImage && (
     <div class="post-card-image-col">
       <a href={url} class="post-card-image-link">
-        <Image
+        <Picture
           class="post-card-image"
           src={data.coverImage}
           alt={data.coverImageAlt ?? ''}
           loading="lazy"
+          formats={['avif', 'webp']}
           widths={[320, 480, 720]}
           sizes="(min-width: 720px) 360px, 100vw"
         />
