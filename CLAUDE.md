@@ -129,9 +129,10 @@ droplet (root:root mode 0600, out of the repo); the template is at
 No preprocessor. Four imports in
 [src/styles/screen.css](src/styles/screen.css):
 
-- `@jeremyfuksa/campfire/styles.css` — Campfire 1.0.0 from npm. Ships
-  the palette, semantic tokens, Hanken Grotesk / Work Sans / Fira Code /
-  Fraunces from Google Fonts, dark-mode flip, shadow scale, etc.
+- `@jeremyfuksa/campfire/styles.css` — Campfire 2.0.0 from npm. Ships
+  the palette, semantic tokens, Hanken Grotesk / Space Grotesk / Fira
+  Code / Fraunces from Google Fonts, dark-mode flip, shadow scale,
+  etc.
 - [tokens.css](src/styles/tokens.css) — site-specific deltas only.
   Binds Fraunces to `--font-heading-editorial`, overrides amber accent
   to `warning-700`, bumps dark `--bg-base` to `neutral-900` (airy
@@ -174,7 +175,7 @@ Four roles, each bound to a specific layer of content:
   eyebrows. Declaration layer.
 - **`--font-body`** — Hanken Grotesk. Paragraphs, blockquote,
   figcaption. Reading layer.
-- **`--font-sans`** — Work Sans. Nav, buttons, labels, inputs,
+- **`--font-sans`** — Space Grotesk. Nav, buttons, labels, inputs,
   metadata. UI layer.
 - **`--font-mono`** — Fira Code. Tinkering strip values, dates,
   read-times, code blocks. Signal layer.

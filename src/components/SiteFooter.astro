@@ -4,46 +4,57 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand-mark" style="--logo-glyph: url('/images/flame.svg')" aria-hidden="true"></div>
-        <div class="footer-brand-text">
-          <span class="footer-brand-name">Jeremy Fuksa</span>
-          <span class="footer-sub-label">The Cocktail Napkin &middot; since 1996</span>
-          <p class="footer-claim">The sketch is the spec.<br />Everything else is translation.</p>
-        </div>
+    <dl class="title-block" aria-label="Site signature">
+      <div class="title-block-cell">
+        <dt class="title-block-label title-block-label-name">Jeremy Fuksa</dt>
+        <dd class="title-block-value">
+          <span class="title-block-sub">since 1996</span>
+          <span class="title-block-sub">&copy; {year}</span>
+        </dd>
+      </div>
+<div class="title-block-cell">
+        <dt class="title-block-label">Location</dt>
+        <dd class="title-block-value">
+          <span>Kansas City, MO</span>
+          <span class="title-block-mono">39.0997&deg; N &bull; 94.5786&deg; W</span>
+        </dd>
+      </div>
+      <div class="title-block-cell">
+        <dt class="title-block-label">Reach</dt>
+        <dd class="title-block-value">
+          <a href="mailto:hello@jeremyfuksa.com">hello@jeremyfuksa.com</a>
+          <span class="title-block-icons">
+            <a href="https://linkedin.com/in/jeremyfuksa" class="title-block-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1"/>
+              </svg>
+            </a>
+            <a href="https://github.com/jeremyfuksa" class="title-block-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+            </a>
+            <a href="https://www.threads.com/@jeremyfuksa" class="title-block-icon" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/>
+              </svg>
+            </a>
+            <a href="/rss.xml" class="title-block-icon" aria-label="RSS">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                <path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/>
+              </svg>
+            </a>
+          </span>
+        </dd>
       </div>
 
-      <nav class="footer-col" aria-label="Site navigation">
-        <span class="footer-col-label">The site</span>
-        <ul class="footer-nav">
-          <li><a href="/writing/">Writing</a></li>
-          <li><a href="/work/">Work</a></li>
-          <li><a href="/workshop/">Workshop</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/work-with-me/">Work with me</a></li>
-        </ul>
-      </nav>
-
-      <div class="footer-col" aria-label="Contact">
-        <span class="footer-col-label">Reach</span>
-        <ul class="footer-contact">
-          <li><a href="mailto:hello@jeremyfuksa.com">hello@jeremyfuksa.com</a></li>
-          <li>
-            <a href="https://linkedin.com/in/jeremyfuksa" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            &middot;
-            <a href="https://github.com/jeremyfuksa" target="_blank" rel="noopener noreferrer">GitHub</a>
-            &middot;
-            <a href="https://www.threads.com/@jeremyfuksa" target="_blank" rel="noopener noreferrer">Threads</a>
-          </li>
-          <li><a href="/rss.xml">RSS</a> &middot; <span class="footer-mono">/rss.xml</span></li>
-          <li class="footer-locale">KF0NUI &middot; Kansas City</li>
-        </ul>
+      <div class="title-block-cell">
+        <dt class="title-block-label">Amateur Radio</dt>
+        <dd class="title-block-value">
+          <a href="https://www.qrz.com/db/KF0NUI" class="title-block-mono" target="_blank" rel="noopener noreferrer">KF0NUI</a>
+          <span class="title-block-sub">Technician class</span>
+        </dd>
       </div>
-    </div>
-
-    <div class="footer-copy-row">
-      <span class="footer-copy">&copy; {year} &middot; Jeremy Fuksa</span>
-    </div>
+    </dl>
   </div>
 </footer>

@@ -2,7 +2,7 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import PostCardFeatured from '~/components/PostCardFeatured.astro';
 import SidebarPostLink from '~/components/SidebarPostLink.astro';
-import TinkeringStrip from '~/components/TinkeringStrip.astro';
+import WorkshopBench from '~/components/WorkshopBench.astro';
 import CloveHitch from '~/components/CloveHitch.astro';
 import { getAllPostsSorted } from '~/lib/tags';
 
@@ -45,22 +45,12 @@ const principles = [
       'Knots and components work the same way — they hold until the requirements change, and then you see what you actually built.',
   },
 ];
-
-const workshopChips = [
-  'Bearpaw',
-  'Kerchunk',
-  'Meshtastic KC',
-  'Amateur radio',
-  'Music experiments',
-];
 ---
 
 <BaseLayout
   title="Jeremy Fuksa — The Cocktail Napkin"
   description="Jeremy Fuksa — thirty years of design, plus the work in progress: design systems, AI design pipelines, and what gets sketched before any of it becomes real."
 >
-  <TinkeringStrip />
-
   <section class="hero">
     <div class="hero-inner">
       <h1 class="hero-h1">The cocktail napkin is older than design.</h1>
@@ -145,19 +135,12 @@ const workshopChips = [
 
   <section class="workshop-bridge" aria-labelledby="workshop-bridge-heading">
     <div class="workshop-bridge-inner">
-      <span class="workshop-bridge-eyebrow">A room next to this one</span>
       <h2 class="workshop-bridge-headline" id="workshop-bridge-heading">The Workshop.</h2>
       <div class="workshop-bridge-body">
-        <p>Bear Paw is a control system for Uniden scanners. Kerchunk is a Pi Zero 2W and a stick SDR I&rsquo;m trying to get into something pocket-sized. I&rsquo;ve been running a Meshtastic mesh network across Kansas City. I spent three months trying to break my Apple Music algorithm on purpose.</p>
-        <p>The Workshop is where I keep all of this. Hiring managers can skip it. Designers who keep reading will probably stay.</p>
+        <p>My neurodivergent brain isn&rsquo;t happy unless I have a handful of creative projects going simultaneously. Right now it&rsquo;s a personal kiosk and a pocket-sized radio scanner.</p>
       </div>
-      <ul class="workshop-bridge-chips" aria-label="Workshop topics">
-        {workshopChips.map((chip) => (
-          <li><a href="/workshop/" class="workshop-chip">{chip}</a></li>
-        ))}
-        <li><a href="/workshop/" class="workshop-chip workshop-chip-more">+ more</a></li>
-      </ul>
       <a href="/workshop/" class="workshop-bridge-cta">Enter the Workshop &rarr;</a>
+      <WorkshopBench />
     </div>
   </section>
 </BaseLayout>

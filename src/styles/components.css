@@ -210,119 +210,122 @@
   margin: 0 auto;
 }
 
-.footer-grid {
+/* Architectural title block: a quiet four-cell row that signs the
+   page from the bottom-right corner — the position a title block
+   actually occupies on a drawing sheet. Cells auto-size to their
+   content rather than fight for equal fractions, so the block stays
+   tight regardless of how short or long any single value is. The
+   only line is the hairline under each cell's label. */
+.title-block {
+  width: 100%;
+  max-width: var(--prose-max);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1.25fr;
-  gap: var(--spacing-10);
-  padding-bottom: var(--spacing-8);
-  border-bottom: var(--border-hairline) solid var(--color-footer-border);
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  justify-content: space-between;
 }
 
-.footer-brand {
+.title-block-cell {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  min-width: 7rem;
 }
 
-.footer-brand-mark {
-  display: none;
-}
+/* Last cell's track anchors to the right edge of the 720px container
+   via the grid's space-between distribution; the cell's content stays
+   left-aligned like every other cell so the labels read consistently. */
 
-.footer-brand-text {
+/* Label band — fixed height so the hairline divider sits at the same
+   y across all four cells regardless of which face the label uses.
+   The Drafter cell's editorial label (Fraunces at text-lg, line-height
+   1.1) sets the band height; the smaller caps labels in the other
+   cells bottom-align inside the band so all four label texts share a
+   baseline at the hairline. */
+.title-block-label {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.footer-brand-name {
-  font-family: var(--font-heading-editorial);
-  font-variation-settings: var(--editorial-font-variation);
-  font-size: var(--text-xl);
-  font-weight: 500;
-  color: var(--color-footer-text);
-  line-height: 1.1;
-}
-
-.footer-sub-label {
-  font-size: var(--text-xs);
+  align-items: flex-end;
+  height: 1.5rem;
   font-family: var(--font-sans);
-  letter-spacing: var(--tracking-wide);
-  color: var(--color-footer-tagline);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-footer-tagline);
+  padding-bottom: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+  border-bottom: 1px solid var(--color-footer-tagline);
 }
 
-.footer-claim {
+/* Drafter cell uses the editorial face as its label so the name sits
+   in the same slot the other cells use for "REACH" or "LOCATION" —
+   the brand IS the label here. */
+.title-block-label-name {
   font-family: var(--font-heading-editorial);
   font-variation-settings: var(--editorial-font-variation);
-  font-style: italic;
   font-size: var(--text-lg);
-  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
   color: var(--color-footer-text);
-  max-width: 22ch;
-  margin-top: var(--spacing-2);
+  line-height: 1;
 }
 
-.footer-col {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
-}
-
-.footer-col-label {
-  font-size: var(--text-xs);
-  font-family: var(--font-sans);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  color: var(--color-footer-tagline);
-}
-
-.footer-nav,
-.footer-contact {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-  list-style: none;
-  padding: 0;
+.title-block-value {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--color-footer-text);
 }
 
-.footer-nav a,
-.footer-contact a {
-  font-size: var(--text-sm);
+.title-block-value a {
   color: var(--color-footer-text);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
-.footer-nav a:hover,
-.footer-contact a:hover {
+.title-block-value a:hover {
   color: var(--color-footer-nav-hover);
 }
 
-.footer-locale {
-  font-size: var(--text-xs);
-  color: var(--color-footer-tagline);
+.title-block-sub {
   font-family: var(--font-sans);
+  font-size: var(--text-2xs);
   letter-spacing: var(--tracking-wide);
-}
-
-.footer-mono {
-  font-family: var(--font-sans);
+  text-transform: uppercase;
   color: var(--color-footer-tagline);
-  font-size: var(--text-xs);
 }
 
-.footer-copy-row {
-  padding-top: var(--spacing-5);
-  display: flex;
-  justify-content: flex-end;
+.title-block-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-1);
 }
 
-.footer-copy {
-  font-size: var(--text-xs);
-  font-family: var(--font-sans);
-  color: var(--color-footer-copy);
-  opacity: 0.75;
+.title-block-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-footer-tagline);
+  transition: color var(--transition-fast);
+}
+
+.title-block-icon:hover {
+  color: var(--color-footer-nav-hover);
+}
+
+.title-block-icon svg {
+  display: block;
+}
+
+.title-block-mono {
+  font-family: var(--font-mono);
 }
 
 /* ---------- Tag Pill ---------- */
@@ -368,7 +371,7 @@
 
 .section-title {
   font-size: var(--text-xs);
-  font-weight: var(--font-weight-extrabold);
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   color: var(--color-section-label);
@@ -853,51 +856,103 @@
   color: var(--text-tertiary);
 }
 
-/* ---------- Tinkering strip ---------- */
+/* ---------- Workshop bench panel ----------
+   Embedded inside the workshop-bridge section. Reads as a workbench
+   status cluster: small uppercase Work Sans labels on the left, mono
+   values on the right, separated by a centered hairline column. Lives
+   on the green cutting-mat surface, so it carries only a hairline
+   border — no background of its own. The spark dot next to the title
+   is this screen's one allowed "live" indicator. */
 
-.tinkering-strip {
+.workshop-bench {
+  margin: var(--spacing-8) 0 0;
+  padding: var(--spacing-4) var(--spacing-5);
+  border: var(--border-hairline) solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklch, var(--bg-base) 60%, transparent);
+}
+
+.dark .workshop-bench {
+  background: color-mix(in oklch, var(--neutral-900) 50%, transparent);
+}
+
+.workshop-bench-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-2) var(--spacing-8);
-  background: var(--bg-subtle);
-  border-bottom: var(--border-hairline) solid var(--color-spark);
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+  padding-bottom: var(--spacing-2);
+  border-bottom: var(--border-hairline) solid var(--border-default);
+}
+
+.workshop-bench-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-spark);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-spark) 25%, transparent);
+}
+
+.workshop-bench-title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.workshop-bench-rows {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--spacing-4);
+  row-gap: var(--spacing-1);
+  align-items: baseline;
+}
+
+.workshop-bench-row {
+  display: contents;
+}
+
+.workshop-bench-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.workshop-bench-value {
+  margin: 0;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--text-secondary);
-  min-height: 32px;
-}
-
-.tinkering-cell {
-  flex: 1 1 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
-.tinkering-cell-center {
-  text-align: center;
-}
-
-.tinkering-cell-right {
-  text-align: right;
-}
-
-@media (max-width: 768px) {
-  .tinkering-strip {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-1);
-    padding: var(--spacing-2) var(--spacing-4);
+@media (max-width: 600px) {
+  .workshop-bench-rows {
+    grid-template-columns: 1fr;
+    row-gap: var(--spacing-2);
   }
-  .tinkering-cell,
-  .tinkering-cell-center,
-  .tinkering-cell-right {
-    text-align: left;
-    width: 100%;
+
+  .workshop-bench-row {
+    display: block;
   }
-  .tinkering-cell-center {
-    display: none;
+
+  .workshop-bench-label {
+    display: block;
+    margin-bottom: var(--spacing-1);
+  }
+
+  .workshop-bench-value {
+    white-space: normal;
   }
 }
 
@@ -1320,7 +1375,7 @@
 
 .featured-work-label {
   font-size: var(--text-xs);
-  font-weight: var(--font-weight-extrabold);
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
   color: var(--color-featured-card-label);
@@ -2371,9 +2426,6 @@
 
 .nav-links a,
 .nav-site-name,
-.footer-tagline,
-.footer-nav a,
-.footer-copy,
 .tag,
 .eyebrow,
 .section-title,
@@ -2503,13 +2555,12 @@
     height: 180px;
   }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
+  .title-block {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-columns: auto;
+    justify-content: stretch;
     gap: var(--spacing-6);
-  }
-
-  .footer-copy-row {
-    justify-content: flex-start;
   }
 
   .principles-grid {
@@ -2535,6 +2586,14 @@
 
 /* Phone: reduce sizes, tighten spacing */
 @media (max-width: 600px) {
+  .title-block {
+    grid-template-columns: 1fr;
+  }
+
+  .title-block-cell {
+    min-width: 0;
+  }
+
   .nav-author-name {
     display: none;
   }

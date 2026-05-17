@@ -1,14 +1,13 @@
 /* Print stylesheet for /resume/.
-   Hides the nav, footer, and tinkering strip; resets backgrounds to white;
-   tightens type so the document fits two to three letter-size pages.
-   Linked only from src/pages/resume.astro via <link rel="stylesheet"
-   media="print"> in BaseLayout's head slot. */
+   Hides the nav and footer; resets backgrounds to white; tightens type
+   so the document fits two to three letter-size pages. Linked only
+   from src/pages/resume.astro via <link rel="stylesheet" media="print">
+   in BaseLayout's head slot. */
 
 @media print {
   /* Hide global chrome */
   .nav,
   .site-footer,
-  .tinkering-strip,
   .reading-progress,
   .theme-toggle {
     display: none !important;

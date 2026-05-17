@@ -1,0 +1,87 @@
+---
+/*
+  Workshop bench panel. Embedded inside the homepage workshop-bridge
+  section as the "what's on the bench right now" status cluster.
+  Signals (GitHub last push, backyard temperature, now playing) fill
+  client-side from /api/tinkering.json; fallback copy renders SSR so
+  the layout is never empty and there's no spinner.
+*/
+---
+
+<aside class="workshop-bench" aria-label="What's on the bench right now">
+  <header class="workshop-bench-header">
+    <span class="workshop-bench-live" aria-hidden="true"></span>
+    <h3 class="workshop-bench-title">Live data from the workshop</h3>
+  </header>
+  <dl class="workshop-bench-rows">
+    <div class="workshop-bench-row">
+      <dt class="workshop-bench-label">GitHub</dt>
+      <dd class="workshop-bench-value" id="bench-github">github.com/jeremyfuksa &middot; quiet lately</dd>
+    </div>
+    <div class="workshop-bench-row">
+      <dt class="workshop-bench-label">Backyard</dt>
+      <dd class="workshop-bench-value" id="bench-temperature">sensor offline</dd>
+    </div>
+    <div class="workshop-bench-row">
+      <dt class="workshop-bench-label">Playing</dt>
+      <dd class="workshop-bench-value" id="bench-now-playing">nothing playing right now</dd>
+    </div>
+  </dl>
+</aside>
+
+<script is:inline>
+  (function () {
+    async function loadBench() {
+      try {
+        const res = await fetch('/api/tinkering.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        render(data);
+      } catch (_e) {
+        // Network or parse error — bench keeps fallback copy.
+      }
+    }
+
+    function render(data) {
+      setText('bench-github', renderGithub(data && data.github));
+      setText('bench-temperature', renderTemp(data && data.temperature));
+      setText('bench-now-playing', renderNowPlaying(data && data.nowPlaying));
+    }
+
+    function setText(id, value) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function renderGithub(g) {
+      if (!g || g.stale || !g.repo || !g.relative) {
+        return 'github.com/jeremyfuksa · quiet lately';
+      }
+      return 'last pushed to ' + g.repo + ' · ' + g.relative;
+    }
+
+    function renderTemp(t) {
+      if (!t || typeof t.fahrenheit !== 'number') {
+        return 'sensor offline';
+      }
+      return t.fahrenheit + '°F';
+    }
+
+    function renderNowPlaying(n) {
+      if (!n) return 'nothing playing right now';
+      if (!n.playing) {
+        return n.state === 'paused' ? 'nothing playing right now' : 'not listening to anything';
+      }
+      if (n.title && n.artist) return '“' + n.title + '” by ' + n.artist;
+      if (n.title) return '“' + n.title + '”';
+      if (n.artist) return 'something by ' + n.artist;
+      return 'nothing playing right now';
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadBench);
+    } else {
+      loadBench();
+    }
+  })();
+</script>
