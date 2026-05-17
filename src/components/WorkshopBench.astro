@@ -24,7 +24,10 @@
     </div>
     <div class="workshop-bench-row">
       <dt class="workshop-bench-label">Playing</dt>
-      <dd class="workshop-bench-value" id="bench-now-playing">nothing playing right now</dd>
+      <dd class="workshop-bench-value workshop-bench-value-playing">
+        <img id="bench-now-playing-art" class="workshop-bench-art" alt="" hidden />
+        <span id="bench-now-playing">nothing playing right now</span>
+      </dd>
     </div>
   </dl>
 </aside>
@@ -46,6 +49,25 @@
       setText('bench-github', renderGithub(data && data.github));
       setText('bench-temperature', renderTemp(data && data.temperature));
       setText('bench-now-playing', renderNowPlaying(data && data.nowPlaying));
+      renderArt(data && data.nowPlaying);
+    }
+
+    function renderArt(n) {
+      var img = document.getElementById('bench-now-playing-art');
+      if (!img) return;
+      if (!n || !n.playing || !n.artKey) {
+        img.hidden = true;
+        img.removeAttribute('src');
+        return;
+      }
+      var src = '/api/now-playing-art/?v=' + encodeURIComponent(n.artKey);
+      // Only update when the underlying track actually changed; avoids
+      // re-decoding the same image on every render tick.
+      if (img.getAttribute('data-key') === n.artKey && !img.hidden) return;
+      img.setAttribute('data-key', n.artKey);
+      img.onerror = function () { img.hidden = true; };
+      img.onload = function () { img.hidden = false; };
+      img.src = src;
     }
 
     function setText(id, value) {

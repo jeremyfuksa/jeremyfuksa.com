@@ -31,6 +31,11 @@ interface NowPlayingSignal {
   state: string;
   title?: string | null;
   artist?: string | null;
+  /* Short hash of the entity_picture path when art is available.
+     Acts as a cache-busting key for /api/now-playing-art so the browser
+     fetches fresh bytes the moment the track changes. Null when no
+     cover art exists for the current track. */
+  artKey?: string | null;
 }
 
 async function fetchGithub(): Promise<GithubSignal> {
@@ -135,10 +140,23 @@ async function fetchNowPlaying(): Promise<NowPlayingSignal> {
 
   const rawTitle = attrs.media_title;
   const rawArtist = attrs.media_artist;
+  const rawPicture = attrs.entity_picture;
   const artist = typeof rawArtist === 'string' ? rawArtist : null;
   let title = typeof rawTitle === 'string' ? rawTitle : null;
   if (title && title.length > 40) {
     title = title.slice(0, 37) + '...';
+  }
+
+  // Hash the entity_picture path into a short opaque key. The browser
+  // uses this as a cache buster on /api/now-playing-art so it picks up
+  // new art the moment HA reports a new track.
+  let artKey: string | null = null;
+  if (typeof rawPicture === 'string' && rawPicture.length > 0) {
+    let h = 0;
+    for (let i = 0; i < rawPicture.length; i++) {
+      h = ((h << 5) - h + rawPicture.charCodeAt(i)) | 0;
+    }
+    artKey = (h >>> 0).toString(36);
   }
 
   return {
@@ -146,6 +164,7 @@ async function fetchNowPlaying(): Promise<NowPlayingSignal> {
     state,
     title,
     artist,
+    artKey,
   };
 }
 

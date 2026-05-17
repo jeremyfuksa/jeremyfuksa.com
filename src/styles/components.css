@@ -936,6 +936,29 @@
   min-width: 0;
 }
 
+/* Playing row: when album art is available, the thumbnail sits inline
+   to the left of the text. Flex container keeps the text truncating
+   with ellipsis at the cell width. */
+.workshop-bench-value-playing {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.workshop-bench-value-playing > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.workshop-bench-art {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
 @media (max-width: 600px) {
   .workshop-bench-rows {
     grid-template-columns: 1fr;
