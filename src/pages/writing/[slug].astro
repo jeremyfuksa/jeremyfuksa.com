@@ -28,6 +28,7 @@ const more = allPosts.filter((p) => p.id !== entry.id).slice(0, 3);
 <BaseLayout
   title={`${data.title} — Jeremy Fuksa`}
   description={data.excerpt}
+  ogImage={data.coverImage?.src}
 >
   <PostLayout
     title={data.title}
