@@ -9,8 +9,7 @@ publishedAt: '2018-04-14T02:42:19.000Z'
 updatedAt: '2026-04-01T22:37:54.000Z'
 author: Jeremy Fuksa
 coverImageCaption: >-
-  <span style="white-space: pre-wrap;">Until this week, I didn’t think that a
-  “happy place” was a real&nbsp;thing.</span>
+  <span style="white-space: pre-wrap;">Until this week, I didn’t think that a “happy place” was a real thing.</span>
 readingTime: 3
 ---
 “The beach is my happy place.”
